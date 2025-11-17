@@ -7,8 +7,8 @@ import Filters from "./Filters";
 const AgentList = () => {
   const { agents, error, loading } = useSalesAgentContext();
 
-  if (loading) return <p>Loading Agents...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (loading) return <p className="loading">Loading Agents...</p>;
+  if (error) return <p className="loading">Error : {error.message}</p>;
   return (
     <>
       <div className="agents">

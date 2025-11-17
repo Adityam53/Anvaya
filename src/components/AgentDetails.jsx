@@ -56,8 +56,8 @@ const AgentDetails = () => {
     return sorted;
   }, [agentFilteredData, filters.sortBy, filters.sortOrder]);
 
-  if (agentLoading) return <p>Loading agent...</p>;
-  if (agentError) return <p>Error loading agent details</p>;
+  if (agentLoading) return <p className="loading">Loading agent...</p>;
+  if (agentError) return <p className="loading">Error loading agent details</p>;
 
   return (
     <div className="agent-details">

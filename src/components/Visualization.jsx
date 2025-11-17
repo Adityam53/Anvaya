@@ -24,8 +24,8 @@ const Visualization = () => {
       <Heading tag="h2" name="Report Overview" />
       <div className="charts">
         <section className="section">
-          {lwLoading && <p>Loading last week’s data...</p>}
-          {lwError && <p>Error: {lwError}</p>}
+          {lwLoading && <p className="loading">Loading last week’s data...</p>}
+          {lwError && <p className="loading"> Error: {lwError}</p>}
           {lastWeekData && lastWeekData.length > 0 && (
             <ReusableChart
               type="bar"

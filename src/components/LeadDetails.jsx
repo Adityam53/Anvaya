@@ -47,8 +47,8 @@ const LeadDetails = () => {
     "Other",
   ];
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (loading) return <p className="loading">Loading...</p>;
+  if (error) return <p className="loading">Error : {error.message}</p>;
 
   return (
     <div className="lead-details">

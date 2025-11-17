@@ -326,6 +326,10 @@ font-size: 0.95rem;
   background-color: #007bff;
   color: #fff;
 }
+.loading{
+  text-align: center;
+  margin: 2rem;
+}
 
 /* === Custom Toastify Styles === */
 .Toastify__toast--success {

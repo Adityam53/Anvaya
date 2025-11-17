@@ -30,8 +30,10 @@ const Comments = () => {
       <div className="comments-section">
         <div>
           <div>
-            {commentsLoading && <p className="comment-card">Loading...</p>}
-            {commentsError && <p className="comment-card">Error</p>}
+            {commentsLoading && (
+              <p className="comment-card loading">Loading...</p>
+            )}
+            {commentsError && <p className="comment-card loading">Error</p>}
           </div>
 
           {comments?.length > 0 ? (

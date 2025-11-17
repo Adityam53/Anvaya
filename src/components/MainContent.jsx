@@ -10,8 +10,8 @@ const MainContent = () => {
   const handleStatusClick = (status) => {
     applyFilters({ status: filters.status === status ? "" : status });
   };
-  if (loading) return <p>Loading leads...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (loading) return <p className="loading">Loading leads...</p>;
+  if (error) return <p className="loading">Error : {error.message}</p>;
 
   return (
     <div className="main-content">

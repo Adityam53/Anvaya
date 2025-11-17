@@ -7,8 +7,8 @@ import Filters from "./Filters";
 const LeadList = ({ hideHeading = false }) => {
   const { leads, error, loading } = useLeadContext();
 
-  if (loading) return <p>Loading leads...</p>;
-  if (error) return <p>Error : {error.message}</p>;
+  if (loading) return <p className="loading">Loading leads...</p>;
+  if (error) return <p className="loading">Error : {error.message}</p>;
 
   return (
     <>
