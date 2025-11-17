@@ -10,6 +10,9 @@ export const useSalesAgentContext = () => useContext(SalesAgentContext);
 export const SalesAgentProvider = ({ children }) => {
   const baseUrl = "https://anvaya-backend-teal.vercel.app/agents";
 
+  const [refreshKey, setRefreshKey] = useState(0);
+  const triggerRefresh = () => setRefreshKey((prev) => prev + 1);
+
   const [url, setUrl] = useState(baseUrl);
   const { data, error, loading } = useFetch(url);
   const [agents, setAgents] = useState([]);
@@ -61,6 +64,26 @@ export const SalesAgentProvider = ({ children }) => {
       toast.error("❌ Failed to add agent. Try again later.");
     }
   };
+
+  const handleDelete = async (id, url, name) => {
+    try {
+      const confirmed = window.confirm(
+        `Are you sure you want to delete this ${name} ?`
+      );
+
+      if (!confirmed) return;
+
+      const res = await fetch(`${url}/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error(`Failed to delete ${name}.`);
+
+      toast.success(`${name} deleted successfully!`);
+
+      setAgents((prev) => prev.filter((agent) => agent._id !== id));
+    } catch (error) {
+      console.error(error);
+      toast.error(`Error in deleting ${name}.`);
+    }
+  };
   return (
     <SalesAgentContext.Provider
       value={{
@@ -71,6 +94,8 @@ export const SalesAgentProvider = ({ children }) => {
         handleChange,
         handleSubmit,
         baseUrl,
+        handleDelete,
+        triggerRefresh,
       }}
     >
       {children}

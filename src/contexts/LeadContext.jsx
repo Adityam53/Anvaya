@@ -209,6 +209,25 @@ export const LeadProvider = ({ children }) => {
     } catch (error) {}
   };
 
+  const handleDelete = async (id, url, name) => {
+    try {
+      const confirmed = window.confirm(
+        `Are you sure you want to delete this ${name} ?`
+      );
+
+      if (!confirmed) return;
+
+      const res = await fetch(`${url}/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error(`Failed to delete ${name}.`);
+
+      toast.success(`${name} deleted successfully!`);
+      setLeads((prev) => (prev ? prev.filter((lead) => lead._id !== id) : []));
+    } catch (error) {
+      console.error(error);
+      toast.error(`Error in deleting ${name}.`);
+    }
+  };
+
   useEffect(() => {
     if (!data) return;
 
@@ -231,7 +250,7 @@ export const LeadProvider = ({ children }) => {
           : b.timeToClose - a.timeToClose;
       });
     }
-    setLeads(sorted);
+    setLeads(sorted.filter(Boolean));
   }, [data, filters.sortBy, filters.sortOrder]);
 
   useEffect(() => {
@@ -311,6 +330,7 @@ export const LeadProvider = ({ children }) => {
         editFormData,
         isEditing,
         refreshKey,
+        handleDelete,
       }}
     >
       {children}

@@ -56,8 +56,8 @@ const AgentDetails = () => {
     return sorted;
   }, [agentFilteredData, filters.sortBy, filters.sortOrder]);
 
-  if (agentLoading) return <p className="loading">Loading agent...</p>;
-  if (agentError) return <p className="loading">Error loading agent details</p>;
+  // if (agentLoading) return <p className="loading">Loading agent...</p>;
+  // if (agentError) return <p className="loading">Error loading agent details</p>;
 
   return (
     <div className="agent-details">
@@ -66,9 +66,8 @@ const AgentDetails = () => {
       {agent && <Heading tag="h2" name={`Sales Agent: ${agent.name}`} />}
 
       <Filters showPriorityFilter />
-
-      {leadLoading && <p>Loading leads...</p>}
-      {leadError && <p>Error loading leads</p>}
+      {agentLoading && <p className="loading">Loading leads...</p>}
+      {agentError && <p className="loading">Error : {error.message}</p>}
 
       <div className="lead-list">
         {sortedAgentLeads.length > 0 ? (

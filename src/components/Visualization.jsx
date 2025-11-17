@@ -45,8 +45,8 @@ const Visualization = () => {
         </section>
 
         <section className="section">
-          {pLoading && <p>Loading pipeline data...</p>}
-          {pError && <p>Error: {pError}</p>}
+          {pLoading && <p className="loading">Loading pipeline data...</p>}
+          {pError && <p className="loading">Error: {pError}</p>}
           {pipelineData && (
             <ReusableChart
               type="pie"
@@ -61,8 +61,10 @@ const Visualization = () => {
 
         <section className="section">
           {" "}
-          {caLoading && <p>Loading closed leads by agent...</p>}
-          {caError && <p>Error: {caError}</p>}
+          {caLoading && (
+            <p className="loading">Loading closed leads by agent...</p>
+          )}
+          {caError && <p className="loading">Error: {caError}</p>}
           {closedByAgentData && closedByAgentData.length > 0 && (
             <ReusableChart
               type="pie"

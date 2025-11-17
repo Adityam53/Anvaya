@@ -29,7 +29,7 @@
   padding: 2rem;
   background-color: #fff;
 }
-.leads,.agents ,.add-form, .lead-details, .agent-details, .lead-status, .visualization{
+.leads,.agents ,.add-form, .lead-details, .agent-details, .lead-status, .visualization, .settings{
   flex: 3;
   background-color: #fff;
 }
@@ -113,14 +113,14 @@ strong{
   padding: 2rem;
 }
 
-.agents .lead-list {
+.agents .lead-list, .manage-agent, .manage-lead {
   flex-direction: column;
   margin-top: 0;
   padding: 2rem;
 }
 
 .leads .lead-list div,
-.agents .lead-list div {
+.agents .lead-list div, .manage-lead,.manage-agent, .manage-agent div, .manage-lead div{
   color: #444;
   background-color: #fff;
   border: 1px solid #e5e7eb;
@@ -132,7 +132,7 @@ strong{
 .leads .lead-list div:hover,
 .agents .lead-list div:hover,
 .lead-list div:hover,
-.status-list div:hover{
+.status-list div:hover,.manage-agent div:hover, .manage-lead div:hover{
   background-color: #00000020;
 }
 
@@ -154,7 +154,7 @@ strong{
 }
 
 .lead-list div,
-.status-list div, .lead-info, .comment-card, .form-group {
+.status-list div, .lead-info, .comment-card, .form-group{
   background-color: white;
   padding: 0.6rem 1rem;
   border-radius: 6px;
@@ -165,6 +165,14 @@ strong{
 
 }
 
+.leads-agents{
+  display: flex;
+  gap: 2rem;
+  margin: 2rem;
+}
+.manage-lead,.manage-agent{
+  width: 100%;
+}
 /* Quick Filters */
 .quick-filters {
   display: flex;
@@ -301,6 +309,23 @@ font-size: 0.95rem;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+}
+.delete-btn{
+  margin-top: 1rem;
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  background-color: black;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.delete-btn:hover{
+  color: black;
+  background-color:  #fff;
+  border: 1px solid black;
 }
 .comments-section{
   margin: 0.5rem;

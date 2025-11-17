@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 const Navigation = () => {
-  const pages = ["Leads", "Leads By Status", "Agents", "Reports"];
+  const pages = ["Leads", "Leads By Status", "Agents", "Reports", "Settings"];
   return (
     <>
       <div className="nav">

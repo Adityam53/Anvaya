@@ -12,6 +12,8 @@ import AddSalesAgent from "./pages/AddSalesAgent";
 import AddLead from "./pages/AddLead";
 import LeadStatusView from "./pages/LeadStatusView";
 import { TagsContextProvider } from "./contexts/TagsContext";
+import ManageAgentsAndLeads from "./components/ManageAgentsAndLeads";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
                   path="/agents"
                   element={<SalesAgentManagement />}
                 ></Route>
+                <Route path="/settings" element={<Settings />}></Route>
                 <Route
                   path="/agents/:agentId"
                   element={<SalesAgentView />}

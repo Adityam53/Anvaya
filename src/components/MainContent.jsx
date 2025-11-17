@@ -10,16 +10,24 @@ const MainContent = () => {
   const handleStatusClick = (status) => {
     applyFilters({ status: filters.status === status ? "" : status });
   };
-  if (loading) return <p className="loading">Loading leads...</p>;
-  if (error) return <p className="loading">Error : {error.message}</p>;
+  // if (loading) return <p className="loading">Loading leads...</p>;
+  // if (error) return <p className="loading">Error : {error.message}</p>;
 
   return (
     <div className="main-content">
+      {loading && <p className="loading">Loading leads...</p>}
+      {error && <p className="loading">Error : {error.message}</p>}
       <div className="section">
         <Heading tag="h3" name={`Leads`} />
         <div className="lead-list">
           {leads.slice(0, 5).map((lead) => (
-            <div key={lead._id}>{lead.name}</div>
+            <Link
+              className="lead-list-item"
+              to={`/leads/${lead._id}`}
+              key={lead._id}
+            >
+              <div>{lead.name}</div>
+            </Link>
           ))}
         </div>
       </div>

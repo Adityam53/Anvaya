@@ -33,7 +33,6 @@ const Comments = () => {
             {commentsLoading && (
               <p className="comment-card loading">Loading...</p>
             )}
-            {commentsError && <p className="comment-card loading">Error</p>}
           </div>
 
           {comments?.length > 0 ? (

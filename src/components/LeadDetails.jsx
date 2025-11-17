@@ -47,15 +47,16 @@ const LeadDetails = () => {
     "Other",
   ];
 
-  if (loading) return <p className="loading">Loading...</p>;
-  if (error) return <p className="loading">Error : {error.message}</p>;
+  // if (loading) return <p className="loading">Loading...</p>;
+  // if (error) return <p className="loading">Error : {error.message}</p>;
 
   return (
     <div className="lead-details">
       <Heading tag="h2" name="Lead Details" />
-
+      {loading && <p className="loading">Loading leads...</p>}
+      {error && <p className="loading">Error : {error.message}</p>}
       {/* VIEW MODE -------------------------- */}
-      {!isEditing && (
+      {!isEditing && leadData && (
         <div className="lead-details-content">
           <p className="lead-info">
             <strong>Name:</strong> {leadData.name}
