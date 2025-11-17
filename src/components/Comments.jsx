@@ -13,14 +13,14 @@ const Comments = () => {
     handleChange,
     handleCommentSubmit,
     commentFormData,
+    refreshKey,
   } = useLeadContext();
   const { agents } = useSalesAgentContext();
   const {
     data: comments,
     loading: commentsLoading,
     error: commentsError,
-    refetch,
-  } = useFetch(`${baseUrl}/${leadId}/comments`);
+  } = useFetch(`${baseUrl}/${leadId}/comments?refresh=${refreshKey}`);
 
   const agentOptions = agents.map((a) => ({ value: a._id, label: a.name }));
 

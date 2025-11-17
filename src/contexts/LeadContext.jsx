@@ -46,6 +46,7 @@ export const LeadProvider = ({ children }) => {
     author: "",
     commentText: "",
   });
+  const [comments, setComments] = useState([]);
 
   const [editFormData, setEditFormData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -198,15 +199,17 @@ export const LeadProvider = ({ children }) => {
         throw new Error(`HTTP error: ${res.status}`);
       }
 
-      const newComment = await res.json();
       toast.success("Comment Added successfully!");
+      triggerRefresh();
 
       setCommentFormData({
         commentText: "",
         author: "",
       });
-      triggerRefresh();
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to add comment");
+    }
   };
 
   const handleDelete = async (id, url, name) => {
@@ -331,6 +334,7 @@ export const LeadProvider = ({ children }) => {
         isEditing,
         refreshKey,
         handleDelete,
+        comments,
       }}
     >
       {children}
