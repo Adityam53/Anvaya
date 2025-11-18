@@ -49,7 +49,7 @@ const Visualization = () => {
           {pError && <p className="loading">Error: {pError}</p>}
           {pipelineData && (
             <ReusableChart
-              type="pie"
+              type="Doughnut"
               title="Total Leads in Pipeline"
               labels={Object.keys(pipelineData)}
               data={Object.values(pipelineData)}
