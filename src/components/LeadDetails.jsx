@@ -81,7 +81,7 @@ const LeadDetails = () => {
           </p>
 
           <button
-            className="edit-btn"
+            className="form-btn"
             onClick={() => loadLeadForEdit(leadData)}
           >
             Edit Details
@@ -194,11 +194,11 @@ const LeadDetails = () => {
           </div>
 
           {/* Buttons */}
-          <button className="save-btn" onClick={() => handleEditSubmit(leadId)}>
+          <button className="form-btn" onClick={() => handleEditSubmit(leadId)}>
             Save Changes
           </button>
 
-          <button className="cancel-btn" onClick={cancelEdit}>
+          <button className="form-btn" onClick={cancelEdit}>
             Cancel
           </button>
         </div>

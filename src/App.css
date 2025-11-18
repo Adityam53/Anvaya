@@ -315,7 +315,7 @@ font-size: 0.95rem;
   align-self: flex-start;
   padding: 0.5rem 1rem;
   font-size: 0.95rem;
-  background-color: black;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -323,9 +323,9 @@ font-size: 0.95rem;
   transition: all 0.2s ease-in-out;
 }
 .delete-btn:hover{
-  color: black;
-  background-color:  #fff;
-  border: 1px solid black;
+  color: #fff;
+  background-color: #005dc9;
+  border: 1px solid #007bff;;
 }
 .comments-section{
   margin: 0.5rem;
@@ -355,6 +355,14 @@ font-size: 0.95rem;
   text-align: center;
   margin: 2rem;
 }
+.lead-details-content .form-btn{
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+}
+.edit-form .form-btn{
+  margin-top: 1rem;
+  margin-right: 0.5rem;
+}
 
 /* === Custom Toastify Styles === */
 .Toastify__toast--success {
@@ -379,4 +387,132 @@ font-size: 0.95rem;
 
 .Toastify__progress-bar--success {
   background-color: #ffffff !important;
+}
+
+@media (max-width:768px) {
+  .row{
+    flex-direction: column;
+    min-height: auto;
+  }
+  .sidebar{
+    max-width: 100%;
+    width: 100%;
+    flex-direction: column;
+    margin-right: 0;
+    border-bottom: 1px solid #e5e7eb;
+    flex: unset;
+  }
+  .main-content{
+    padding: 1rem;
+  }
+  .filters{
+  margin: 1rem;
+  }
+.nav{
+  padding: 1rem 0.5rem
+  }
+/* .nav-items{
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  } */
+  /* .nav-link{
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
+  } */
+   .section{
+    padding: 1rem;
+   }
+   .section h2,
+  .section h3 {
+    font-size: 1.1rem;
+  }
+  .lead-list{
+    flex-direction: column;
+    padding: 1rem;
+    gap: 0.8rem
+  }
+  .lead-list div,
+  .status-list div {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  .status-list{
+    padding: 1rem;
+    width: 100%;
+  }
+  .filter-section, .sort-section, .quick-filters{
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .form {
+    padding: 1rem 0;
+  }
+  .form-content {
+    margin: 1rem 1rem;
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+  .form-input,
+  .form-btn,
+  .delete-btn,
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+  .lead-details-content .form-btn{
+  margin-left: 0rem;
+  margin-top: 1rem;
+}
+  .lead-details-content,
+  .edit-form {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  .edit-form .form-btn{
+    margin-top: 1rem;
+  }
+  .lead-info {
+    font-size: 1rem;
+    margin: 0.3rem 0;
+  }
+
+  .comments-section {
+    margin: 1rem;
+    gap: 1.2rem;
+  }
+
+  .comment-card {
+    padding: 1rem;
+  }
+
+  .comments-section .form-group {
+    padding: 1rem;
+  }
+
+  .charts {
+    margin: 1rem;
+  }
+
+  .leads-agents {
+    flex-direction: column;
+    margin: 1rem;
+    gap: 1rem;
+  }
+
+  .manage-agent,
+  .manage-lead {
+    padding: 1rem !important;
+    margin: 0 !important;
+  }
+
+  .add-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .Toastify__toast {
+    font-size: 0.9rem;
+    padding: 0.7rem !important;
+  }
 }
