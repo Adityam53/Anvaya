@@ -9,11 +9,13 @@ Developed using React JS, React Router, Express, Node JS and MongoDb database.
 
 ## Quick Start
 
+```
 git clone https://github.com/Adityam53/Anvaya.git
 cd Anvaya
 cd Front-End
 npm install
 npm run dev
+```
 
 ## Technologies
 
@@ -86,7 +88,9 @@ List All Leads<br>
 Sample Response:<br>
 
 ```
+
 [{_id,name,source,tags},...]
+
 ```
 
 ### **GET/API/Agents**<br>
@@ -95,6 +99,7 @@ List All Agents<br>
 Sample Response:<br>
 
 ```
+
 [{_id,name,email},...]
 
 ```
@@ -105,7 +110,9 @@ Lead By Id<br>
 Sample Response:<br>
 
 ```
-{_id,name,source,tags}
+
+{\_id,name,source,tags}
+
 ```
 
 ### **GET/API/Agents/:id**<br>
@@ -114,7 +121,9 @@ Agent By Id<br>
 Sample Response:<br>
 
 ```
-{_id,name,email}
+
+{\_id,name,email}
+
 ```
 
 ### **POST /api/Agents**<br>
@@ -132,3 +141,7 @@ Sample Response:
 ## Contact
 
 For bugs or feature requests, please reach out to (adityamoorjmalani53@gamil.com)
+
+```
+
+```
