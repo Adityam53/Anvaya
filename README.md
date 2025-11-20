@@ -27,7 +27,7 @@ npm run dev
 
 ## Demo Video
 
-Watch a walkthrough (5-7 minutes) of all major features of this app:[Loom Video](https://www.loom.com/share/581b05b262594e74a6fd8ffaaffec1d6)
+Watch a walkthrough (3 minutes) of all major features of this app:[Loom Video](https://www.loom.com/share/581b05b262594e74a6fd8ffaaffec1d6)
 
 ## Features
 
