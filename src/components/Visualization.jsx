@@ -26,7 +26,7 @@ const Visualization = () => {
         <section className="section">
           {lwLoading && <p className="loading">Loading last week’s data...</p>}
           {lwError && <p className="loading"> Error: {lwError}</p>}
-          {Array.isArraylastWeekData && lastWeekData.length > 0 && (
+          {Array.isArraylastWeekData && (
             <ReusableChart
               type="bar"
               title="Leads Closed in Last 7 Days"
