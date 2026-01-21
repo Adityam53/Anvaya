@@ -12,7 +12,6 @@ import AddSalesAgent from "./pages/AddSalesAgent";
 import AddLead from "./pages/AddLead";
 import LeadStatusView from "./pages/LeadStatusView";
 import { TagsContextProvider } from "./contexts/TagsContext";
-import ManageAgentsAndLeads from "./components/ManageAgentsAndLeads";
 import Settings from "./pages/Settings";
 
 function App() {
