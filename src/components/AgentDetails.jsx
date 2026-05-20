@@ -41,7 +41,7 @@ const AgentDetails = () => {
       sorted.sort((a, b) =>
         filters.sortOrder === "asc"
           ? priorityRank[a.priority] - priorityRank[b.priority]
-          : priorityRank[b.priority] - priorityRank[a.priority]
+          : priorityRank[b.priority] - priorityRank[a.priority],
       );
     }
 
@@ -49,7 +49,7 @@ const AgentDetails = () => {
       sorted.sort((a, b) =>
         filters.sortOrder === "asc"
           ? a.timeToClose - b.timeToClose
-          : b.timeToClose - a.timeToClose
+          : b.timeToClose - a.timeToClose,
       );
     }
 
