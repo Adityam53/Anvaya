@@ -215,7 +215,7 @@ export const LeadProvider = ({ children }) => {
   const handleDelete = async (id, url, name) => {
     try {
       const confirmed = window.confirm(
-        `Are you sure you want to delete this ${name} ?`
+        `Are you sure you want to delete this ${name} ?`,
       );
 
       if (!confirmed) return;
