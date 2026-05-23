@@ -5,7 +5,7 @@ const Reports = () => {
   return (
     <>
       <div>
-        <Heading name=" Anvaya Reports" tag="h1" />
+        {/* <Heading name=" Anvaya Reports" tag="h1" /> */}
         <div className="row">
           <Sidebar />
           <Visualization />

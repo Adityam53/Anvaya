@@ -61,9 +61,9 @@ const AgentDetails = () => {
 
   return (
     <div className="agent-details">
-      <Heading tag="h2" name="Lead List By Agent" />
+      {/* <Heading tag="h2" name="Lead List By Agent" /> */}
 
-      {agent && <Heading tag="h2" name={`Sales Agent: ${agent.name}`} />}
+      {agent && <Heading tag="h2" name={` ${agent.name}`} />}
 
       <Filters showPriorityFilter />
       {agentLoading && <p className="loading">Loading leads...</p>}
@@ -78,13 +78,33 @@ const AgentDetails = () => {
               to={`/leads/${lead._id}`}
             >
               <div>
-                {lead.name} – {lead.status} – {lead.priority} -{" "}
-                {lead.timeToClose}
+                <strong>{lead.name}</strong>
+
+                <span className="lead-meta">
+                  <br />
+                  Status: {lead.status}
+                  <br />
+                  Priority: {lead.priority}
+                  <br />
+                  Time to Close: {lead.timeToClose} days
+                </span>
               </div>
             </Link>
           ))
         ) : (
-          <p>No leads found for this agent.</p>
+          <div className="empty-state">
+            <h3>
+              {Object.values(filters).some(Boolean)
+                ? "No matching leads found"
+                : "No leads assigned"}
+            </h3>
+
+            <p>
+              {Object.values(filters).some(Boolean)
+                ? "No leads match the selected filters. Try adjusting your filters."
+                : "This sales agent does not have any leads assigned yet."}
+            </p>
+          </div>
         )}
       </div>
     </div>

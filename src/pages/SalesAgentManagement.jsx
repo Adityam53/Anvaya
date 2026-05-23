@@ -7,7 +7,7 @@ const SalesAgentManagement = () => {
   return (
     <>
       <div>
-        <Heading tag="h1" name="Sales Agent Management"></Heading>
+        {/* <Heading tag="h1" name="Sales Agent Management"></Heading> */}
         <div className="row">
           <Sidebar />
           <AgentList />

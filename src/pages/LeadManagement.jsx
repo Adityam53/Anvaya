@@ -5,7 +5,7 @@ const LeadManagement = () => {
   return (
     <>
       <div>
-        <Heading name="Lead Management" tag="h1" />
+        {/* <Heading name="Lead Management" tag="h1" /> */}
         <div className="row">
           <Sidebar />
           <LeadDetails />

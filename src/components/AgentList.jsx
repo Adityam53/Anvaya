@@ -11,20 +11,20 @@ const AgentList = () => {
   // if (error) return <p className="loading">Error : {error.message}</p>;
   return (
     <>
+      {" "}
       <div className="agents">
-        <Heading tag="h2" name="Sales Agent List" />
+        <Heading tag="h2" name="Sales Representatives" />{" "}
+        {loading && <p className="loading">Loading agents...</p>}
+        {error && <p className="loading">Error : {error.message}</p>}
         <div className="lead-list">
-          {loading && <p className="loading">Loading agents...</p>}
-          {error && <p className="loading">Error : {error.message}</p>}
           {agents.map((agent) => (
             <Link className="agent-list-item" to={`/agents/${agent._id}`}>
               <div key={agent._id}>
-                Agent: {agent.name} - {agent.email}
+                <strong>{agent.name}</strong> <br /> {agent.email}
               </div>
             </Link>
           ))}
         </div>
-
         <div className="btn-section">
           <Button to="/addAgent" label="+ Add New Agent" />
         </div>

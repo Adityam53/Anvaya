@@ -1,20 +1,32 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { FaAddressBook, FaUserTie, FaChartPie, FaCog } from "react-icons/fa";
+
 const Navigation = () => {
-  const pages = ["Leads", "Leads By Status", "Agents", "Reports", "Settings"];
+  const navItems = [
+    { name: "Leads", path: "/leads", icon: <FaAddressBook /> },
+    { name: "Agents", path: "/agents", icon: <FaUserTie /> },
+    { name: "Reports", path: "/reports", icon: <FaChartPie /> },
+    { name: "Settings", path: "/settings", icon: <FaCog /> },
+  ];
+
   return (
-    <>
-      <div className="nav">
-        <ul className="nav-items">
-          {pages.map((page) => (
-            <li key={page} className="list-item">
-              <Link to={`/${page.toLowerCase()}`} className="nav-link">
-                {page}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <nav className="nav">
+      <ul className="nav-items">
+        {navItems.map((item) => (
+          <li key={item.name} className="list-item">
+            <NavLink
+              to={item.path}
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
+            >
+              <span className="nav-icon">{item.icon}</span>
+              <span>{item.name}</span>
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 

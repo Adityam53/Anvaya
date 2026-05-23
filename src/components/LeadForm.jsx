@@ -35,55 +35,12 @@ const LeadForm = () => {
     "Other",
   ];
 
-  const customSelectStyles = {
-    control: (base, state) => ({
-      ...base,
-      backgroundColor: "#fafafa",
-      borderColor: state.isFocused ? "#007bff" : "#d1d5db",
-      boxShadow: state.isFocused ? "0 0 0 2px rgba(0, 123, 255, 0.15)" : "none",
-      borderRadius: "6px",
-      padding: "2px",
-      "&:hover": {
-        borderColor: "#007bff",
-      },
-    }),
-    multiValue: (base) => ({
-      ...base,
-      backgroundColor: "#eaf3ff",
-      color: "#007bff",
-      borderRadius: "6px",
-      padding: "0 4px",
-    }),
-    multiValueLabel: (base) => ({
-      ...base,
-      color: "#007bff",
-      fontWeight: 500,
-    }),
-    multiValueRemove: (base) => ({
-      ...base,
-      color: "#007bff",
-      ":hover": {
-        backgroundColor: "#007bff",
-        color: "white",
-      },
-    }),
-    placeholder: (base) => ({
-      ...base,
-      color: "#888",
-    }),
-    menu: (base) => ({
-      ...base,
-      zIndex: 9999,
-    }),
-  };
-
   return (
     <div className="add-form">
       <Heading tag="h2" name="Add New Lead" />
 
       <div className="form">
         <form className="form-content" onSubmit={handleSubmit}>
-          {/* Lead Name */}
           <div className="form-group">
             <label className="form-label">Lead Name:</label>
             <input
@@ -96,7 +53,6 @@ const LeadForm = () => {
             />
           </div>
 
-          {/* Lead Source */}
           <div className="form-group">
             <label className="form-label">Lead Source:</label>
             <select
@@ -107,15 +63,18 @@ const LeadForm = () => {
             >
               <option value="">Select source</option>
               {sourceEnums.map((s) => (
-                <option key={s}>{s}</option>
+                <option key={s} value={s}>
+                  {s}
+                </option>
               ))}
             </select>
           </div>
 
-          {/* Sales Agents */}
           <div className="form-group">
             <label className="form-label">Sales Agent:</label>
             <Select
+              className="react-select-container form-input"
+              classNamePrefix="react-select"
               isClearable
               options={agentOptions}
               value={
@@ -126,11 +85,9 @@ const LeadForm = () => {
                 handleSelectChange(selected, "salesAgent")
               }
               placeholder="Select agents..."
-              styles={customSelectStyles}
             />
           </div>
 
-          {/* Lead Status */}
           <div className="form-group">
             <label className="form-label">Lead Status:</label>
             <select
@@ -141,12 +98,13 @@ const LeadForm = () => {
             >
               <option value="">Select status</option>
               {statusEnums.map((s) => (
-                <option key={s}>{s}</option>
+                <option key={s} value={s}>
+                  {s}
+                </option>
               ))}
             </select>
           </div>
 
-          {/* Priority */}
           <div className="form-group">
             <label className="form-label">Priority:</label>
             <select
@@ -157,12 +115,13 @@ const LeadForm = () => {
             >
               <option value="">Select priority</option>
               {priorityEnums.map((p) => (
-                <option key={p}>{p}</option>
+                <option key={p} value={p}>
+                  {p}
+                </option>
               ))}
             </select>
           </div>
 
-          {/* Time to Close */}
           <div className="form-group">
             <label className="form-label">Time to Close (days):</label>
             <input
@@ -175,22 +134,26 @@ const LeadForm = () => {
             />
           </div>
 
-          {/* Tags */}
           <div className="form-group">
             <label className="form-label">Tags:</label>
             <Select
+              className="react-select-container form-input"
+              classNamePrefix="react-select"
               isMulti
               options={tagOptions}
               placeholder="Select tags..."
               value={tagOptions.filter((opt) =>
-                formData.tags.includes(opt.value)
+                formData.tags.includes(opt.value),
               )}
               onChange={(selected) => handleMultiSelectChange(selected, "tags")}
-              styles={customSelectStyles}
             />
           </div>
 
-          <button className="form-btn" type="submit">
+          <button
+            className="save-btn"
+            type="submit"
+            style={{ marginTop: "1rem" }}
+          >
             Create Lead
           </button>
         </form>

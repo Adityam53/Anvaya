@@ -75,7 +75,7 @@ const Comments = () => {
                 onChange={(selected) => handleSelectChange(selected, "author")}
                 value={
                   agentOptions.find(
-                    (opt) => opt.value === commentFormData.author
+                    (opt) => opt.value === commentFormData.author,
                   ) || null
                 }
                 options={agentOptions}

@@ -5,7 +5,7 @@ const SalesAgentView = () => {
   return (
     <>
       <div>
-        <Heading name="Leads By Sales Agent" tag="h1" />
+        {/* <Heading name="Leads By Sales Agent" tag="h1" /> */}
         <div className="row">
           <Sidebar />
           <AgentDetails />

@@ -6,7 +6,7 @@ const Leads = () => {
   return (
     <>
       <div>
-        <Heading tag="h1" name="Lead List" />
+        {/* <Heading tag="h1" name="Lead List" /> */}
         <div className="row">
           <Sidebar />
           <LeadList />

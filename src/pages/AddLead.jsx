@@ -5,7 +5,7 @@ const AddLead = () => {
   return (
     <>
       <div>
-        <Heading name="Add New Lead" tag="h1" />
+        {/* <Heading name="Add New Lead" tag="h1" /> */}
         <div className="row">
           <Sidebar />
           <LeadForm />

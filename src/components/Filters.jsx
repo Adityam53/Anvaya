@@ -1,8 +1,8 @@
 import Select from "react-select";
 import { useSalesAgentContext } from "../contexts/SalesAgentContext";
 import { useLeadContext } from "../contexts/LeadContext";
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
+
 const Filters = ({ showAgentFilter, showPriorityFilter }) => {
   const { agents } = useSalesAgentContext();
   const { applyFilters, filters } = useLeadContext();
@@ -25,6 +25,7 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
     value: prior,
     label: prior,
   }));
+
   const handleAgentChange = (selectedAgent) => {
     applyFilters({ salesAgent: selectedAgent ? selectedAgent.value : "" });
   };
@@ -34,9 +35,9 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
   };
 
   const handlePriorityChange = (selectedOption) => {
-    console.log("Priority filter applied:", selectedOption?.value);
     applyFilters({ priority: selectedOption ? selectedOption.value : "" });
   };
+
   return (
     <>
       <div className="section filters">
@@ -44,7 +45,8 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
         <div className="filter-section">
           {showAgentFilter && (
             <Select
-              className="form-input"
+              className="react-select-container form-input"
+              classNamePrefix="react-select"
               options={agentOptions}
               isClearable
               onChange={handleAgentChange}
@@ -53,14 +55,15 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
                   ? agentOptions.find((opt) => opt.value === filters.salesAgent)
                   : null
               }
-              placeholder="Select SalesAgent"
-            ></Select>
+              placeholder="Filter by Agent"
+            />
           )}
 
           <Select
-            className="form-input"
+            className="react-select-container form-input"
+            classNamePrefix="react-select"
             options={statusOptions}
-            placeholder="Select Lead Status"
+            placeholder="Filter by Status"
             onChange={handleStatusChange}
             value={
               filters.status
@@ -68,39 +71,36 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
                 : null
             }
             isClearable
-          ></Select>
+          />
 
           {showPriorityFilter && (
             <Select
-              className="form-input"
+              className="react-select-container form-input"
+              classNamePrefix="react-select"
               options={priorityOptions}
               onChange={handlePriorityChange}
               value={
                 filters.priority
                   ? priorityOptions.find(
-                      (opt) => opt.value === filters.priority
+                      (opt) => opt.value === filters.priority,
                     )
                   : null
               }
               isClearable
-              placeholder="Select Lead Priority"
-            ></Select>
+              placeholder="Filter by Priority"
+            />
           )}
         </div>
         <div className="sort-section">
           <button
-            className={`filter-btn ${
-              filters.sortBy === "priority" ? "active" : ""
-            }`}
+            className={`filter-btn ${filters.sortBy === "priority" ? "active" : ""}`}
             onClick={() => applyFilters({ sortBy: "priority" })}
           >
             Sort by Priority
           </button>
 
           <button
-            className={`filter-btn ${
-              filters.sortBy === "timeToClose" ? "active" : ""
-            }`}
+            className={`filter-btn ${filters.sortBy === "timeToClose" ? "active" : ""}`}
             onClick={() => applyFilters({ sortBy: "timeToClose" })}
           >
             Sort by Time to Close
@@ -121,4 +121,5 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
     </>
   );
 };
+
 export default Filters;

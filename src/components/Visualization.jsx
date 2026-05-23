@@ -21,12 +21,12 @@ const Visualization = () => {
 
   return (
     <div className="visualization">
-      <Heading tag="h2" name="Report Overview" />
+      <Heading tag="h2" name="Analytics Dashboard" />
       <div className="charts">
         <section className="section">
           {lwLoading && <p className="loading">Loading last week’s data...</p>}
           {lwError && <p className="loading"> Error: {lwError}</p>}
-          {Array.isArraylastWeekData && (
+          {Array.isArray(lastWeekData) && (
             <ReusableChart
               type="bar"
               title="Leads Closed in Last 7 Days"
@@ -35,7 +35,7 @@ const Visualization = () => {
                   weekday: "short",
                   day: "numeric",
                   month: "short",
-                })
+                }),
               )}
               data={Array(lastWeekData.length).fill(1)} // one per lead
               datasetLabel="Closed Leads"
@@ -60,7 +60,6 @@ const Visualization = () => {
         </section>
 
         <section className="section">
-          {" "}
           {caLoading && (
             <p className="loading">Loading closed leads by agent...</p>
           )}

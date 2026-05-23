@@ -6,7 +6,7 @@ const Settings = () => {
   return (
     <>
       <div>
-        <Heading tag="h1" name={"Anvaya CRM"} />
+        {/* <Heading tag="h1" name={"Anvaya CRM"} /> */}
         <div className="row">
           <Sidebar />
           <ManageAgentsAndLeads />

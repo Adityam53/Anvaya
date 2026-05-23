@@ -23,28 +23,25 @@ const ManageAgentsAndLeads = () => {
   return (
     <>
       <div className="settings">
-        <Heading tag={"h2"} name={"Settings"} />
+        <Heading tag={"h2"} name={"Administration"} />
+
         <div className="leads-agents">
           <div className="manage-lead">
-            <Heading tag={"h3"} name={"Manage Leads"} />
+            <Heading tag={"h3"} name={"Lead Operations"} />
             {leadLoading && <p className="loading">Loading leads...</p>}
             {leadError && <p className="loading">Error: {leadError}</p>}
+
             {leadData &&
               leadData.map((lead) => (
                 <div key={lead._id}>
                   <Link to={`/leads/${lead._id}`} className="lead-list-item">
                     <p>
-                      {" "}
-                      <strong>Lead Name:- </strong>
-                      {lead.name}
+                      <strong>{lead.name}</strong>
                     </p>
-                    <p>
-                      {" "}
-                      <strong>Lead Source:- </strong> {lead.source}
-                    </p>{" "}
+                    <p>Source: {lead.source}</p>
                   </Link>
                   <button
-                    className="delete-btn "
+                    className="delete-btn"
                     onClick={() => deleteLead(lead._id, leadUrl, "Lead")}
                   >
                     Delete Lead
@@ -52,22 +49,20 @@ const ManageAgentsAndLeads = () => {
                 </div>
               ))}
           </div>
+
           <div className="manage-agent">
-            <Heading tag={"h3"} name={"Manage Agents"} />
+            <Heading tag={"h3"} name={"Agent Management"} />
             {agentLoading && <p className="loading">Loading agents...</p>}
             {agentError && <p className="loading">Error: {agentError}</p>}
+
             {agentData &&
               agentData.map((agent) => (
                 <div key={agent._id}>
                   <Link to={`/agents/${agent._id}`} className="lead-list-item">
                     <p>
-                      <strong>Agent Name:- </strong>
-                      {agent.name}{" "}
+                      <strong>{agent.name}</strong>
                     </p>
-                    <p>
-                      <strong>Agent Email:- </strong>
-                      {agent.email}
-                    </p>
+                    <p>{agent.email}</p>
                   </Link>
                   <button
                     onClick={() => deleteAgent(agent._id, agentUrl, "Agent")}

@@ -9,6 +9,7 @@ import { useTagsContext } from "../contexts/TagsContext";
 
 const LeadDetails = () => {
   const { leadId } = useParams();
+
   const {
     baseUrl,
     isEditing,
@@ -24,11 +25,19 @@ const LeadDetails = () => {
 
   const url = `${baseUrl}/${leadId}?refresh=${refreshKey}`;
   const { data: leadData, loading, error } = useFetch(url);
+
   const { agents = [] } = useSalesAgentContext();
   const { tags = [] } = useTagsContext();
 
-  const agentOptions = agents.map((a) => ({ value: a._id, label: a.name }));
-  const tagOptions = tags.map((t) => ({ value: t.name, label: t.name }));
+  const agentOptions = agents.map((a) => ({
+    value: a._id,
+    label: a.name,
+  }));
+
+  const tagOptions = tags.map((t) => ({
+    value: t.name,
+    label: t.name,
+  }));
 
   const statusEnums = [
     "New",
@@ -37,7 +46,9 @@ const LeadDetails = () => {
     "Proposal Sent",
     "Closed",
   ];
+
   const priorityEnums = ["High", "Medium", "Low"];
+
   const sourceEnums = [
     "Website",
     "Referral",
@@ -47,160 +58,179 @@ const LeadDetails = () => {
     "Other",
   ];
 
-  // if (loading) return <p className="loading">Loading...</p>;
-  // if (error) return <p className="loading">Error : {error.message}</p>;
+  if (loading) return <p className="loading">Loading details...</p>;
+  if (error) return <p className="loading">Error: {error.message}</p>;
+  if (!leadData) return null;
 
   return (
-    <div className="lead-details">
-      <Heading tag="h2" name="Lead Details" />
-      {loading && <p className="loading">Loading leads...</p>}
-      {error && <p className="loading">Error : {error.message}</p>}
-      {/* VIEW MODE -------------------------- */}
-      {!isEditing && leadData && (
-        <div className="lead-details-content">
-          <p className="lead-info">
-            <strong>Name:</strong> {leadData.name}
-          </p>
-          <p className="lead-info">
-            <strong>Source:</strong> {leadData.source}
-          </p>
-          <p className="lead-info">
-            <strong>Status:</strong> {leadData.status}
-          </p>
-          <p className="lead-info">
-            <strong>Priority:</strong> {leadData.priority}
-          </p>
-          <p className="lead-info">
-            <strong>Sales Agent:</strong> {leadData.salesAgent?.name}
-          </p>
-          <p className="lead-info">
-            <strong>Time to Close:</strong> {leadData.timeToClose} days
-          </p>
-          <p className="lead-info">
-            <strong>Tags:</strong> {leadData.tags.join(", ")}
-          </p>
+    <div className="lead-details-page">
+      <Heading tag="h2" name="Prospect Profile" />
 
-          <button
-            className="form-btn"
-            onClick={() => loadLeadForEdit(leadData)}
-          >
-            Edit Details
-          </button>
+      {/* ================= VIEW MODE ================= */}
+
+      {!isEditing && (
+        <>
+          <div className="lead-grid">
+            <div className="lead-card">
+              <label>Name</label>
+              <p>{leadData.name}</p>
+            </div>
+
+            <div className="lead-card">
+              <label>Source</label>
+              <p>{leadData.source}</p>
+            </div>
+
+            <div className="lead-card">
+              <label>Status</label>
+              <p>{leadData.status}</p>
+            </div>
+
+            <div className="lead-card">
+              <label>Priority</label>
+              <p>{leadData.priority}</p>
+            </div>
+
+            <div className="lead-card">
+              <label>Sales Agent</label>
+              <p>{leadData.salesAgent?.name || "Unassigned"}</p>
+            </div>
+
+            <div className="lead-card">
+              <label>Time to Close</label>
+              <p>{leadData.timeToClose} days</p>
+            </div>
+
+            <div className="lead-card full">
+              <label>Tags</label>
+              <p>{leadData.tags?.join(", ") || "None"}</p>
+            </div>
+          </div>
+
+          <div className="lead-actions">
+            <button
+              className="edit-btn"
+              onClick={() => loadLeadForEdit(leadData)}
+            >
+              Edit Details
+            </button>
+          </div>
 
           <Comments />
-        </div>
+        </>
       )}
 
-      {/* EDIT MODE -------------------------- */}
-      {isEditing && editFormData && (
-        <div className="edit-form">
-          {/* Name */}
+      {/* ================= EDIT MODE ================= */}
+
+      {isEditing && (
+        <div className="lead-edit-form">
           <div className="form-group">
-            <label>Name:</label>
+            <label>Name</label>
             <input
               name="name"
-              className="form-input"
               value={editFormData.name}
               onChange={handleChange}
             />
           </div>
 
-          {/* Source */}
           <div className="form-group">
-            <label>Source:</label>
+            <label>Source</label>
             <select
               name="source"
-              className="form-input"
               value={editFormData.source}
               onChange={handleChange}
             >
-              <option value="">Select source</option>
-              {sourceEnums.map((s) => (
-                <option key={s} value={s}>
-                  {s}
+              <option value="">Select Source</option>
+
+              {sourceEnums.map((source) => (
+                <option key={source} value={source}>
+                  {source}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Agent */}
           <div className="form-group">
-            <label>Sales Agent:</label>
+            <label>Sales Agent</label>
+
             <Select
               isClearable
               options={agentOptions}
               value={agentOptions.find(
-                (opt) => opt.value === editFormData.salesAgent
+                (option) => option.value === editFormData.salesAgent,
               )}
-              onChange={(selected) =>
-                handleSelectChange(selected, "salesAgent")
-              }
+              onChange={(value) => handleSelectChange(value, "salesAgent")}
             />
           </div>
 
-          {/* Status */}
           <div className="form-group">
-            <label>Status:</label>
+            <label>Status</label>
+
             <select
               name="status"
-              className="form-input"
               value={editFormData.status}
               onChange={handleChange}
             >
-              {statusEnums.map((s) => (
-                <option key={s}>{s}</option>
+              {statusEnums.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
               ))}
             </select>
           </div>
 
-          {/* Priority */}
           <div className="form-group">
-            <label>Priority:</label>
+            <label>Priority</label>
+
             <select
               name="priority"
-              className="form-input"
               value={editFormData.priority}
               onChange={handleChange}
             >
-              {priorityEnums.map((p) => (
-                <option key={p}>{p}</option>
+              {priorityEnums.map((priority) => (
+                <option key={priority} value={priority}>
+                  {priority}
+                </option>
               ))}
             </select>
           </div>
 
-          {/* Time to Close */}
           <div className="form-group">
-            <label>Time to Close:</label>
+            <label>Time To Close</label>
+
             <input
-              name="timeToClose"
               type="number"
-              className="form-input"
+              name="timeToClose"
               value={editFormData.timeToClose}
               onChange={handleChange}
             />
           </div>
 
-          {/* Tags */}
-          <div className="form-group">
-            <label>Tags:</label>
+          <div className="form-group full">
+            <label>Tags</label>
+
             <Select
               isMulti
               options={tagOptions}
-              value={tagOptions.filter((opt) =>
-                editFormData.tags.includes(opt.value)
+              value={tagOptions.filter((option) =>
+                editFormData.tags.includes(option.value),
               )}
-              onChange={(selected) => handleMultiSelectChange(selected, "tags")}
+              onChange={(value) => handleMultiSelectChange(value, "tags")}
             />
           </div>
 
-          {/* Buttons */}
-          <button className="form-btn" onClick={() => handleEditSubmit(leadId)}>
-            Save Changes
-          </button>
+          <div className="form-actions">
+            <button
+              className="save-btn"
+              onClick={() => handleEditSubmit(leadId)}
+            >
+              Save Changes
+            </button>
 
-          <button className="form-btn" onClick={cancelEdit}>
-            Cancel
-          </button>
+            <button className="cancel-btn" onClick={cancelEdit}>
+              Cancel
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -5,7 +5,7 @@ const LeadStatusView = () => {
   return (
     <>
       <div>
-        <Heading name="Leads By Status" tag="h1" />
+        {/* <Heading name="Leads By Status" tag="h1" /> */}
         <div className="row">
           <Sidebar />
           <LeadStatus />

@@ -6,7 +6,7 @@ const AddSalesAgent = () => {
   return (
     <>
       <div>
-        <Heading name="Add New Sales Agent" tag="h1" />
+        {/* <Heading name="Add New Sales Agent" tag="h1" /> */}
         <div className="row">
           <Sidebar />
           <AgentForm />

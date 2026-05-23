@@ -10,15 +10,24 @@ const MainContent = () => {
   const handleStatusClick = (status) => {
     applyFilters({ status: filters.status === status ? "" : status });
   };
-  // if (loading) return <p className="loading">Loading leads...</p>;
-  // if (error) return <p className="loading">Error : {error.message}</p>;
 
   return (
     <div className="main-content">
+      {/* Introduction Block */}
+      <div className="section">
+        <Heading tag="h3" name="Welcome to Anvaya CRM" />
+        <p className="crm-description">
+          Anvaya is your dedicated Customer Relationship Management platform.
+          Use this dashboard to track your pipeline, monitor lead status, and
+          streamline your sales process with ease.
+        </p>
+      </div>
+
       {loading && <p className="loading">Loading leads...</p>}
       {error && <p className="loading">Error : {error.message}</p>}
+
       <div className="section">
-        <Heading tag="h3" name={`Leads`} />
+        <Heading tag="h3" name={`Recent Leads`} />
         <div className="lead-list">
           {leads.slice(0, 5).map((lead) => (
             <Link
@@ -26,19 +35,22 @@ const MainContent = () => {
               to={`/leads/${lead._id}`}
               key={lead._id}
             >
-              <div>{lead.name}</div>
+              <div>
+                <strong>{lead.name}</strong>
+              </div>
+              <div>Status: {lead.status}</div>
             </Link>
           ))}
         </div>
       </div>
 
       <div className="section">
-        <Heading tag="h3" name="Lead Status" />
+        <Heading tag="h3" name="Pipeline Overview" />
         <div className="status-list">
-          <div>- New: {leadCounts.new} Leads</div>
-          <div>- Contacted: {leadCounts.contacted} Leads</div>
-          <div>- Qualified: {leadCounts.qualified} Leads</div>
-          <div>- Closed: {leadCounts.closed} Leads</div>
+          <div>New: {leadCounts.new} Leads</div>
+          <div>Contacted: {leadCounts.contacted} Leads</div>
+          <div>Qualified: {leadCounts.qualified} Leads</div>
+          <div>Closed: {leadCounts.closed} Leads</div>
         </div>
       </div>
 
@@ -55,7 +67,9 @@ const MainContent = () => {
             </button>
           ))}
         </div>
-        <Button label="+ Add New Lead" to="/addLead" />
+        <div className="btn-section">
+          <Button label="+ Add New Lead" to="/addLead" />
+        </div>
       </div>
     </div>
   );
