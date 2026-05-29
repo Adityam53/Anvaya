@@ -1,13 +1,116 @@
-/* ==========================================================================
-   1. Structural Grid Layout & Main Outer Contexts
-   ========================================================================== */
+:root {
+  /* ======================================================
+     PRIMARY BRAND
+  ====================================================== */
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-light: #eff6ff;
+
+  /* ======================================================
+     SEMANTIC COLORS
+  ====================================================== */
+
+  --success: #16a34a;
+  --success-light: #dcfce7;
+
+  --warning: #d97706;
+  --warning-light: #fef3c7;
+
+  --danger: #dc2626;
+  --danger-light: #fee2e2;
+
+  --info: #0891b2;
+  --info-light: #cffafe;
+
+  --purple: #7c3aed;
+  --purple-light: #ede9fe;
+
+  /* ======================================================
+     SURFACES
+  ====================================================== */
+
+  --bg-app: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-hover: #f8fafc;
+
+  /* ======================================================
+     TYPOGRAPHY
+  ====================================================== */
+
+  --text-main: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-soft: #94a3b8;
+
+  /* ======================================================
+     BORDERS
+  ====================================================== */
+
+  --border-color: #e2e8f0;
+  --border-hover: #cbd5e1;
+
+  /* ======================================================
+     RADIUS
+  ====================================================== */
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* ======================================================
+     SHADOWS
+  ====================================================== */
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+
+  --shadow-md:
+    0 4px 10px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+
+  --shadow-lg:
+    0 12px 30px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.05);
+
+  /* ======================================================
+     TRANSITIONS
+  ====================================================== */
+
+  --transition: all 0.25s ease;
+}
+
+/* ======================================================
+   RESET
+====================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  background: var(--bg-app);
+
+  color: var(--text-main);
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* ======================================================
+   MAIN LAYOUT
+====================================================== */
+
 .row {
   display: flex;
   min-height: 100vh;
-  background-color: var(--bg-app);
+  background: var(--bg-app);
 }
 
-/* Base structural blocks standardized to guarantee identical padding & widths */
 .main-content,
 .leads,
 .agents,
@@ -16,82 +119,70 @@
 .agent-details,
 .visualization,
 .lead-details-page,
-.settings {
+.settings,
+.lead-status {
   flex: 1;
+  width: 100%;
+  max-width: 1280px;
+
+  margin: 0 auto;
+
   padding: 2.5rem;
-  background-color: var(--bg-app);
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-.lead-status {
-  flex: 1;
-  background-color: var(--bg-app);
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-.lead-status .heading {
-  padding: 2.5rem 2.5rem 0rem 2.5rem;
-  margin-bottom: 0;
-}
-/* Explicit Fix: Force identical structural alignments for Lead Status View matching Lead List */
-.lead-status {
-  /* padding: 2.5rem !important; */
-  margin: 0 auto !important;
 }
 
-/* ==========================================================================
-   2. Sidebar & Navigation Blueprint (Fixed Alignments & Spacing)
-   ========================================================================== */
+/* ======================================================
+   SIDEBAR
+====================================================== */
+
 .sidebar {
-  flex: 0 0 260px;
-  max-width: 260px;
-  background-color: var(--bg-card);
+  flex: 0 0 270px;
+  max-width: 270px;
+
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+
   border-right: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+
+  box-shadow: 4px 0 24px rgba(15, 23, 42, 0.04);
+
   position: sticky;
   top: 0;
+
+  height: 100vh;
+
   z-index: 100;
 }
 
-/* Explicit Fix: Reset inner sidebar containers to line up child components flawlessly */
-.sidebar > div {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-/* Explicit Fix: Remove heavy bottom padding and set balanced, symmetrical borders */
 .sidebar .heading {
-  padding: 1.5rem;
+  padding: 1.75rem 1.5rem;
+
   border-bottom: 1px solid var(--border-color);
-  text-align: left;
-  margin-bottom: 0rem;
 }
 
 .sidebar .heading h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--primary);
-  letter-spacing: -0.03em;
   margin: 0;
+
+  font-size: 1.45rem;
+  font-weight: 800;
+
+  color: var(--primary);
+
+  letter-spacing: -0.03em;
 }
 
-/* Explicit Fix: Perfectly align navigation with sidebar title padding */
 .nav {
   padding: 1rem;
 }
 
 .nav-items {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+
   margin: 0;
   padding: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.4rem;
 }
 
 .list-item {
@@ -101,751 +192,1486 @@
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+
+  gap: 0.9rem;
 
   width: 100%;
+
   padding: 0.85rem 1rem;
 
+  border-radius: 14px;
+
   text-decoration: none;
+
   color: var(--text-muted);
 
-  border-radius: 12px;
-
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
 
-  transition: all 0.25s ease;
+  transition: var(--transition);
 }
+
 .nav-link:hover {
   background: var(--primary-light);
+
   color: var(--primary);
 
   transform: translateX(4px);
 }
 
-.nav-link:hover .nav-icon {
-  background: rgba(59, 130, 246, 0.15);
-}
-
 .nav-link.active {
-  background: #eef4ff;
+  background: #eaf1ff;
+
   color: var(--primary);
 
-  border: 1px solid #dbe7ff;
+  border: 1px solid #dbeafe;
 }
 
-.nav-link.active .nav-icon {
-  background: #dbeafe;
-  color: var(--primary);
-}
-
-.nav-link span:last-child {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 .nav-icon {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
-  background: rgba(59, 130, 246, 0.08);
+  background: rgba(37, 99, 235, 0.08);
 
   color: var(--primary);
 
-  font-size: 1rem;
-
   flex-shrink: 0;
 
-  transition: all 0.25s ease;
+  transition: var(--transition);
 }
-/* ==========================================================================
-   3. Main Application Header Customization
-   ========================================================================== */
+
+.nav-link:hover .nav-icon {
+  background: rgba(37, 99, 235, 0.14);
+}
+
+/* ======================================================
+   DASHBOARD HERO
+====================================================== */
+
+.dashboard-hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+}
+
+/* ======================================================
+   KPI STATS
+====================================================== */
+
+.dashboard-stats {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+  gap: 1.5rem;
+
+  margin-bottom: 2rem;
+}
+
+.stats-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 1.5rem;
+
+  border: 1px solid var(--border-color);
+
+  box-shadow: var(--shadow-sm);
+
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  transition: var(--transition);
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: var(--shadow-lg);
+}
+
+.stats-icon {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.4rem;
+
+  flex-shrink: 0;
+}
+
+.stats-content p {
+  margin: 0;
+
+  font-size: 0.82rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+
+  color: var(--text-muted);
+}
+
+.stats-content h2 {
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+
+  font-size: 2rem;
+  font-weight: 800;
+
+  color: var(--text-main);
+}
+
+/* CARD THEMES */
+
+.primary-card .stats-icon {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.success-card .stats-icon {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.warning-card .stats-icon {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.purple-card .stats-icon {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+/* ======================================================
+   PAGE HEADER
+====================================================== */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin-bottom: 2rem;
+}
+
+/* ======================================================
+   FILTER HEADER
+====================================================== */
+
+.filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 1.5rem;
+}
+
+.filters-title {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.65rem;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  color: var(--text-main);
+}
+
+.filters-title svg {
+  color: var(--primary);
+}
+
+/* ======================================================
+   FILTER BUTTONS
+====================================================== */
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.55rem;
+}
+
+/* ======================================================
+   REACT SELECT
+====================================================== */
+
+.react-select__control {
+  min-height: 50px !important;
+
+  border-radius: 14px !important;
+
+  border: 1px solid transparent !important;
+
+  background: #f8fafc !important;
+
+  box-shadow: none !important;
+
+  transition: var(--transition) !important;
+}
+
+.react-select__control:hover {
+  border-color: var(--border-color) !important;
+
+  background: white !important;
+}
+
+.react-select__control--is-focused {
+  border-color: var(--primary) !important;
+
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1) !important;
+
+  background: white !important;
+}
+
+.react-select__menu {
+  border-radius: 14px !important;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border-color);
+
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.react-select__option {
+  padding: 0.9rem 1rem !important;
+
+  font-size: 0.92rem;
+}
+
+.react-select__option--is-focused {
+  background: var(--primary-light) !important;
+
+  color: var(--primary) !important;
+}
+
+.react-select__option--is-selected {
+  background: var(--primary) !important;
+}
+
+/* ======================================================
+   LEAD HEADER
+====================================================== */
+
+.lead-header-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.35rem;
+}
+
+/* ======================================================
+   META LABELS
+====================================================== */
+
+.meta-label {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.45rem;
+}
+
+/* ======================================================
+   LEAD FOOTER
+====================================================== */
+
+.lead-card-footer {
+  margin-top: auto;
+
+  padding-top: 1rem;
+
+  border-top: 1px solid #f1f5f9;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--primary);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  transition: var(--transition);
+}
+
+.lead-list-item:hover .lead-card-footer {
+  color: var(--primary-hover);
+}
+
+/* ======================================================
+   EMPTY STATE
+====================================================== */
+
+.empty-state {
+  background: white;
+
+  border: 1px dashed var(--border-color);
+
+  border-radius: 24px;
+
+  padding: 4rem 2rem;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1rem;
+}
+
+.empty-state h3 {
+  margin: 0;
+
+  font-size: 1.5rem;
+  font-weight: 800;
+
+  color: var(--text-main);
+}
+
+.empty-state p {
+  max-width: 500px;
+
+  margin: 0;
+
+  line-height: 1.7;
+
+  color: var(--text-muted);
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+/* ======================================================
+   SECTION HEADER
+====================================================== */
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 1.5rem;
+}
+
+.view-all-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.5rem;
+
+  color: var(--primary);
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: var(--transition);
+}
+
+.view-all-link:hover {
+  gap: 0.7rem;
+}
+
+/* ======================================================
+   LEAD SOURCE
+====================================================== */
+
+.lead-source {
+  margin-top: 0.35rem;
+
+  font-size: 0.88rem;
+
+  color: var(--text-muted);
+}
+
+/* ======================================================
+   PIPELINE GRID
+====================================================== */
+
+.pipeline-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 1rem;
+}
+
+.pipeline-card {
+  padding: 1.4rem;
+
+  border-radius: 20px;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.8rem;
+
+  transition: var(--transition);
+}
+
+.pipeline-card:hover {
+  transform: translateY(-3px);
+}
+
+.pipeline-card span {
+  font-size: 0.85rem;
+
+  font-weight: 700;
+
+  opacity: 0.9;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+.pipeline-card h2 {
+  margin: 0;
+
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+/* PIPELINE COLORS */
+
+.new-pipeline {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: #1e3a8a;
+}
+
+.contacted-pipeline {
+  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+  color: #5b21b6;
+}
+
+.qualified-pipeline {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  color: #166534;
+}
+
+.closed-pipeline {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #991b1b;
+}
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .dashboard-hero-content,
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-stats,
+  .pipeline-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ======================================================
+   HEADINGS
+====================================================== */
+
 .heading {
-  margin-bottom: 1.75rem;
-  text-align: left;
+  margin-bottom: 2rem;
 }
 
 .heading h1 {
-  font-size: 1.75rem;
-  font-weight: 700;
+  margin: 0;
+
+  font-size: 2rem;
+  font-weight: 800;
+
   color: var(--text-main);
-  letter-spacing: -0.03em;
+
+  letter-spacing: -0.04em;
 }
 
 .heading h2 {
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: var(--text-main);
-  letter-spacing: -0.02em;
   margin-bottom: 0.5rem;
+
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  color: var(--text-main);
 }
 
 .heading h3 {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
+
   color: var(--text-main);
 }
 
-/* Header layout top banner block override */
-.bottom-border {
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-card);
-  padding: 0;
-}
-.bottom-border .heading {
-  margin: 0;
-  padding: 1.25rem 2.5rem;
+.crm-description {
+  margin-top: 0.5rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
 }
 
-/* ==========================================================================
-   4. Filters & Controls Customization (Dashboard & Leads Page)
-   ========================================================================== */
-.section.filters {
-  background-color: var(--bg-card);
+/* ======================================================
+   SECTION CARDS
+====================================================== */
+
+.section {
+  background: var(--bg-card);
+
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  margin: 0 0 2rem 0 !important; /* Explicit Spacing Setup */
+
+  border-radius: var(--radius-lg);
+
+  padding: 2rem;
+
+  margin-bottom: 2rem;
+
   box-shadow: var(--shadow-sm);
+
+  backdrop-filter: blur(8px);
+
+  transition: var(--transition);
+}
+
+.section:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* ======================================================
+   FILTERS
+====================================================== */
+
+.section.filters {
+  padding: 1.5rem;
 }
 
 .filter-section {
   display: grid;
+
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
   gap: 1rem;
-  align-items: center;
 }
 
+.quick-filters,
 .sort-section {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+
   gap: 0.75rem;
+
   margin-top: 1.25rem;
+}
+
+.sort-section {
   padding-top: 1.25rem;
+
   border-top: 1px solid var(--border-color);
 }
 
-/* Action Control Buttons Elements */
 .filter-btn {
+  background: white;
+
   border: 1px solid var(--border-color);
-  background: var(--bg-card);
+
   color: var(--text-muted);
-  border-radius: var(--radius-sm);
-  padding: 0.5rem 1rem;
+
+  border-radius: 10px;
+
+  min-height: 40px;
+
+  padding: 0.6rem 1rem;
+
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
+
   cursor: pointer;
+
   transition: var(--transition);
 }
 
 .filter-btn:hover {
+  background: var(--primary-light);
+
   border-color: var(--primary);
+
   color: var(--primary);
-  background-color: var(--primary-light);
 }
 
 .filter-btn.active {
-  background-color: var(--primary);
-  color: #fff;
+  background: var(--primary);
+
   border-color: var(--primary);
+
+  color: white;
 }
 
-/* Quick filter segment panels */
-.quick-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
+/* ======================================================
+   BUTTON SYSTEM
+====================================================== */
 
-/* Explicit Fix: Isolate Add New Lead spacing with clean margins to block layout overlaps */
-.btn-section {
-  margin-top: 1.5rem;
-  padding-top: 0.5rem;
-  clear: both;
-}
-
-.add-btn,
-.form-btn,
-.edit-btn,
-.save-btn {
-  background-color: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 0.625rem 1.25rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: var(--transition);
+.btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+
+  gap: 0.65rem;
+
+  min-height: 48px;
+
+  padding: 0.85rem 1.25rem;
+
+  border-radius: 14px;
+
+  font-size: 0.92rem;
+  font-weight: 700;
+
   text-decoration: none;
+
+  transition: all 0.25s ease;
+
+  cursor: pointer;
+
+  border: 1px solid transparent;
+}
+
+/* PRIMARY */
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+
+  color: white;
+
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.18);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.24);
+}
+
+/* SECONDARY */
+
+.btn-secondary {
+  background: white;
+
+  border-color: var(--border-color);
+
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+  background: #f8fbff;
+}
+
+/* DANGER */
+
+.btn-danger {
+  background: #fee2e2;
+
+  color: #dc2626;
+}
+
+.btn-danger:hover {
+  background: #fecaca;
+}
+
+/* FULL WIDTH */
+
+.btn-full {
+  width: 100%;
+}
+
+/* ICON */
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1rem;
+}
+
+/* ======================================================
+   AGENT STATS
+====================================================== */
+
+.agent-stats {
+  margin-bottom: 2rem;
+}
+
+/* ======================================================
+   AGENT CARD
+====================================================== */
+
+.agent-list-item {
+  position: relative;
+
+  overflow: hidden;
+
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 22px;
+
+  padding: 1.2rem 1.25rem;
+
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  transition: all 0.25s ease;
+
+  text-decoration: none;
+
+  min-height: 140px;
+}
+
+.agent-list-item:hover {
+  transform: translateY(-3px);
+
+  border-color: #cbd5e1;
+
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.07);
+}
+
+/* ======================================================
+   AVATAR
+====================================================== */
+
+.agent-avatar {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 18px;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.2rem;
+  font-weight: 800;
+
+  flex-shrink: 0;
+
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.18);
+}
+
+/* ======================================================
+   CONTENT
+====================================================== */
+
+.agent-card-content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 0.7rem;
+
+  min-width: 0;
+}
+
+/* ======================================================
+   MAIN INFO
+====================================================== */
+
+.agent-main-info {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.35rem;
+}
+
+.agent-main-info h3 {
+  margin: 0;
+
+  font-size: 1rem;
+  font-weight: 750;
+
+  color: var(--text-main);
+
+  line-height: 1.2;
+}
+
+/* ======================================================
+   ROLE BADGE
+====================================================== */
+
+.agent-role-badge {
+  display: inline-flex;
+
+  align-self: flex-start;
+
+  padding: 0.3rem 0.65rem;
+
+  border-radius: 999px;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+/* ======================================================
+   EMAIL
+====================================================== */
+
+.agent-email {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.45rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.86rem;
+
+  line-height: 1.4;
+
+  overflow: hidden;
+}
+
+.agent-email span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agent-email svg {
+  color: var(--primary);
+
+  flex-shrink: 0;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.agent-card-footer {
+  margin-top: 0.15rem;
+
+  padding-top: 0.8rem;
+
+  border-top: 1px solid #f1f5f9;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--primary);
+
+  font-size: 0.82rem;
+  font-weight: 700;
+
+  transition: all 0.25s ease;
+}
+
+.agent-list-item:hover .agent-card-footer {
+  color: var(--primary-hover);
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .agent-list-item {
+    align-items: flex-start;
+
+    min-height: auto;
+  }
+
+  .agent-card-content {
+    width: 100%;
+  }
+}
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+
+.add-btn,
+.save-btn {
+  background: var(--primary);
+
+  color: white;
+
+  border: none;
+
+  min-height: 44px;
+
+  padding: 0.75rem 1.25rem;
+
+  border-radius: 12px;
+
+  font-size: 0.92rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: var(--transition);
+
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.18);
 }
 
 .add-btn:hover,
-.form-btn:hover,
-.edit-btn:hover,
 .save-btn:hover {
-  background-color: var(--primary-hover);
+  background: var(--primary-hover);
+
+  transform: translateY(-1px);
+}
+
+.edit-btn,
+.form-btn {
+  background: white;
+
+  color: var(--text-main);
+
+  border: 1px solid var(--border-color);
+
+  min-height: 44px;
+
+  padding: 0.75rem 1.25rem;
+
+  border-radius: 12px;
+
+  font-size: 0.92rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: var(--transition);
+}
+
+.edit-btn:hover,
+.form-btn:hover {
+  background: var(--primary-light);
+
+  border-color: var(--primary);
+
+  color: var(--primary);
 }
 
 .cancel-btn {
-  background-color: var(--bg-card);
+  background: #f8fafc;
+
   border: 1px solid var(--border-color);
+
   color: var(--text-muted);
-  border-radius: var(--radius-sm);
-  padding: 0.625rem 1.25rem;
-  font-size: 0.9rem;
-  font-weight: 500;
+
+  min-height: 44px;
+
+  padding: 0.75rem 1.25rem;
+
+  border-radius: 12px;
+
+  font-size: 0.92rem;
+  font-weight: 700;
+
   cursor: pointer;
+
   transition: var(--transition);
 }
 
 .cancel-btn:hover {
-  background-color: var(--bg-app);
+  background: #eef2f7;
+
   color: var(--text-main);
 }
 
 .delete-btn {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: white;
+
   color: var(--danger);
-  padding: 0.4rem 0.85rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border-radius: var(--radius-sm);
+
+  border: 1px solid #fecaca;
+
+  min-height: 40px;
+
+  padding: 0.65rem 1rem;
+
+  border-radius: 10px;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+
   cursor: pointer;
+
   transition: var(--transition);
 }
 
 .delete-btn:hover {
-  background-color: var(--danger-light);
+  background: var(--danger);
+
+  color: white;
+
   border-color: var(--danger);
+}
+
+/* ======================================================
+   LEAD GRID
+====================================================== */
+
+.lead-list {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+
+  gap: 1.5rem;
+}
+
+/* ======================================================
+   LEAD CARD
+====================================================== */
+
+.lead-list-item {
+  position: relative;
+
+  overflow: hidden;
+
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 24px;
+
+  padding: 1.5rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.1rem;
+
+  min-height: 240px;
+
+  transition: var(--transition);
+
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.lead-list-item::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  background: linear-gradient(90deg, var(--primary), #60a5fa);
+
+  opacity: 0;
+
+  transition: var(--transition);
+}
+
+.lead-list-item:hover::before {
+  opacity: 1;
+}
+
+.lead-list-item:hover {
+  transform: translateY(-5px);
+
+  border-color: var(--border-hover);
+
+  box-shadow: var(--shadow-lg);
+}
+
+.lead-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.lead-card-header h3 {
+  margin: 0;
+
+  font-size: 1.15rem;
+  font-weight: 800;
+
+  line-height: 1.4;
+
+  color: var(--text-main);
+
+  max-width: 75%;
+}
+
+.lead-divider {
+  width: 100%;
+  height: 1px;
+
+  background: #eef2f7;
+}
+
+.lead-meta-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1.2rem 1rem;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.4rem;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.meta-label {
+  font-size: 0.72rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  color: var(--text-soft);
+}
+
+.meta-value {
+  font-size: 0.96rem;
+
+  font-weight: 700;
+
+  color: var(--text-main);
+}
+
+/* ======================================================
+   BADGES
+====================================================== */
+
+.status-badge,
+.priority-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 32px;
+
+  padding: 0.45rem 0.9rem;
+
+  border-radius: 999px;
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+/* STATUS */
+
+.status-new {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.status-contacted {
+  background: var(--purple-light);
+  color: var(--purple);
+}
+
+.status-qualified {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.status-proposal-sent {
+  background: var(--warning-light);
+  color: var(--warning);
+}
+
+.status-closed {
+  background: var(--danger-light);
   color: var(--danger);
 }
 
-/* ==========================================================================
-   5. Modern Cards for Lead Lists & Agent Lists
-   ========================================================================== */
-.lead-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.25rem;
-  margin-top: 1.25rem;
+/* PRIORITY */
+
+.priority-high {
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
-/* Restructuring specific flat column views used inside lists */
-.leads .lead-list,
-.agent-details .lead-list,
-.agents .lead-list,
-.status {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)) !important;
-  padding: 0 !important;
-  margin-top: 1.25rem !important;
+.priority-medium {
+  background: #fef3c7;
+  color: #b45309;
 }
 
-/* Clear styling overrides for React link item components */
-.lead-list-item,
-.agent-list-item {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.75rem;
+.priority-low {
+  background: #dcfce7;
+  color: #15803d;
 }
 
-/* Explicit Fix: Reset raw contextual item containers inside Links */
-.lead-list-item p,
-.agent-list-item p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
+/* ======================================================
+   AGENT CARDS
+====================================================== */
 
-/* Lead text style treatments */
-.lead-list-item strong,
-.agent-list-item strong {
-  color: var(--text-main);
-  font-weight: 600;
-}
-
-.lead-list-item:hover,
 .agent-list-item:hover {
+  transform: translateY(-4px);
+
   border-color: var(--primary);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  background-color: #fff !important;
+
+  box-shadow: var(--shadow-lg);
 }
 
-/* ==========================================================================
-   6. Pipeline Counter Metrics Grid
-   ========================================================================== */
-.status-list {
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.status-list div {
-  background-color: var(--bg-card);
-  padding: 1.25rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  border-left: 4px solid var(--primary);
-  font-weight: 600;
-  color: var(--text-main);
-  box-shadow: var(--shadow-sm);
-}
-
-/* ==========================================================================
-   7. LEAD DETAILS
-   ========================================================================== */
-
-.lead-details-page {
-  width: 100%;
-}
-
-/* MAIN LAYOUT */
-
-/* .lead-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) 320px;
-  gap: 24px;
-  align-items: start;
-} */
-
-/* DETAILS GRID */
-
-.lead-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 24px;
-}
-.lead-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 24px;
-}
-/* INFO CARDS */
-
-.lead-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: var(--transition);
-  box-shadow: var(--shadow-sm);
-}
-
-.lead-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--primary);
-  box-shadow: var(--shadow-md);
-}
-
-.lead-card label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-}
-
-.lead-card p {
+.agent-card-content h3 {
   margin: 0;
-  font-size: 0.95rem;
-  font-weight: 600;
+
+  font-size: 1.05rem;
+  font-weight: 800;
+
   color: var(--text-main);
-  line-height: 1.5;
-  word-break: break-word;
 }
 
-/* FULL WIDTH CARD */
-
-.lead-card.full {
-  grid-column: 1 / -1;
-}
-
-/* RIGHT SIDEBAR */
-
-/* .lead-side {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  position: sticky;
-  top: 24px;
-} */
-
-/* EDIT BUTTON */
-
-/* .lead-side .edit-btn {
-  width: 100%;
-  justify-content: center;
-} */
-
-/* ==========================================================================
-   EDIT FORM
-   ========================================================================== */
-
-.lead-edit-form {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  box-shadow: var(--shadow-sm);
-
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.lead-edit-form .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.lead-edit-form .form-group.full {
-  grid-column: 1 / -1;
-}
-
-.lead-edit-form label {
-  font-size: 0.85rem;
-  font-weight: 600;
+.agent-email-text {
   color: var(--text-muted);
+
+  font-size: 0.88rem;
 }
 
-.lead-edit-form input,
-.lead-edit-form select {
-  width: 100%;
-  min-height: 44px;
-  padding: 10px 14px;
+/* ======================================================
+   FORMS
+====================================================== */
 
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-
-  font-size: 0.95rem;
-  background: #fff;
-  color: var(--text-main);
-
-  transition: var(--transition);
-}
-
-.lead-edit-form input:focus,
-.lead-edit-form select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
-/* ACTION BUTTONS */
-
-.form-actions {
-  grid-column: 1 / -1;
-
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.form-actions .save-btn {
-  min-width: 150px;
-}
-
-.form-actions .cancel-btn {
-  min-width: 120px;
-}
-
-/* COMMENTS SECTION INSIDE SIDEBAR */
-
-/* .lead-side .comments-section {
-  margin-top: 0;
-} */
-
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-
-@media (max-width: 992px) {
-  .lead-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .lead-side {
-    position: static;
-  }
-}
-
-@media (max-width: 768px) {
-  .lead-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .lead-edit-form {
-    grid-template-columns: 1fr;
-    padding: 20px;
-  }
-
-  .lead-edit-form .form-group.full {
-    grid-column: auto;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .form-actions button {
-    width: 100%;
-  }
-}
-/* ==========================================================================
-   8. Settings view - Manage Leads & Manage Agents Control Panels
-   ========================================================================== */
-.leads-agents {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-  gap: 2rem;
-  margin: 0;
-}
-
-.manage-lead,
-.manage-agent {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-/* Clean structural cards inside the settings control board panels */
-.manage-lead > div,
-.manage-agent > div {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background-color: var(--bg-card) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: var(--radius-lg) !important;
-  padding: 1.5rem !important;
-  box-shadow: var(--shadow-sm) !important;
-  transition: var(--transition);
-}
-
-.manage-lead > div:hover,
-.manage-agent > div:hover {
-  box-shadow: var(--shadow-md) !important;
-}
-
-.manage-lead .lead-list-item,
-.manage-agent .lead-list-item {
-  border: none !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-}
-
-.manage-lead p,
-.manage-agent p {
-  margin-bottom: 0.25rem;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-/* ==========================================================================
-   9. Clean Dashboard Section Cards & Layout Blocks
-   ========================================================================== */
-.section {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
-.section h2,
-.section h3 {
-  color: var(--text-main);
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 1.25rem;
-}
-
-/* ==========================================================================
-   10. Form Layout Components Customization
-   ========================================================================== */
 .form {
   display: flex;
-  justify-content: flex-start;
-  padding: 0;
 }
 
 .form-content {
+  width: 100%;
+  max-width: 760px;
+
+  background: white;
+
   border: 1px solid var(--border-color);
+
   border-radius: var(--radius-lg);
+
   padding: 2.5rem;
-  margin: 0;
+
+  box-shadow: var(--shadow-sm);
+
   display: flex;
   flex-direction: column;
+
   gap: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  width: 100%;
-  max-width: 750px;
-  background-color: var(--bg-card);
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
+
+  gap: 0.55rem;
 }
 
 .form-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+
+  color: var(--text-muted);
 }
 
-.form-input {
+.form-input,
+.lead-edit-form input,
+.lead-edit-form select {
   width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
+
+  min-height: 48px;
+
+  padding: 0.8rem 1rem;
+
+  border-radius: 12px;
+
+  border: 1px solid transparent;
+
+  background: #f8fafc;
+
   color: var(--text-main);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
+
+  font-size: 0.95rem;
+
   transition: var(--transition);
-  background-color: #f8fafc;
 }
 
-.form-input:focus {
+.form-input:hover,
+.lead-edit-form input:hover,
+.lead-edit-form select:hover {
+  background: white;
+
+  border-color: var(--border-color);
+}
+
+.form-input:focus,
+.lead-edit-form input:focus,
+.lead-edit-form select:focus {
   outline: none;
+
+  background: white;
+
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  background-color: #fff;
+
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
-/* ==========================================================================
-   11. Comments Feed Customization Blueprint
-   ========================================================================== */
+/* ======================================================
+   COMMENTS
+====================================================== */
+
 .comments-section {
-  margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 0;
-}
 
-.comment-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  border: 1px solid var(--border-color) !important;
-  background-color: var(--bg-card) !important;
-  border-radius: var(--radius-md) !important;
-  padding: 1.25rem !important;
-  box-shadow: var(--shadow-sm) !important;
+  gap: 1rem;
 }
 
 .comment-meta {
   font-size: 0.8rem;
-  color: var(--text-meta);
+
+  color: var(--text-soft);
 }
 
 .comment-text {
-  font-size: 0.925rem;
+  margin-top: 0.5rem;
+
   color: var(--text-main);
+
+  line-height: 1.6;
 }
 
-.comments-section .form-group {
-  background-color: var(--bg-card) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: var(--radius-lg) !important;
-  padding: 2rem !important;
-  gap: 1rem !important;
-  box-shadow: var(--shadow-sm) !important;
-}
+/* ======================================================
+   CHARTS
+====================================================== */
 
-/* ==========================================================================
-   12. Analytics Report Grid System Cards
-   ========================================================================== */
 .charts {
-  margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+
   gap: 2rem;
 }
 
-.charts .section {
-  margin-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
+/* ======================================================
+   STATUS COUNTERS
+====================================================== */
+
+.status-list {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 1rem;
+}
+
+.status-list div {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-left: 4px solid var(--primary);
+
+  border-radius: 18px;
+
+  padding: 1.25rem;
+
+  font-weight: 700;
+
+  color: var(--text-main);
+
   box-shadow: var(--shadow-sm);
-  transition: var(--transition);
 }
 
-.charts .section:hover {
-  box-shadow: var(--shadow-md);
-}
+/* ======================================================
+   RESPONSIVE
+====================================================== */
 
-/* ==========================================================================
-   13. System Feedback Components & React Select Styling Overrides
-   ========================================================================== */
-.loading {
-  text-align: center;
-  margin: 1.5rem auto;
-  color: var(--text-meta);
-  font-weight: 500;
-}
-
-.react-select-container {
-  font-size: 0.9rem;
-}
-.react-select__control {
-  background-color: #f8fafc !important;
-  border-color: var(--border-color) !important;
-  border-radius: var(--radius-sm) !important;
-}
-
-/* ==========================================================================
-   14. Responsive Viewport Adaptive Design (Media Queries)
-   ========================================================================== */
 @media (max-width: 1024px) {
   .charts,
-  .leads-agents {
+  .lead-list {
     grid-template-columns: 1fr;
   }
 }
@@ -856,12 +1682,12 @@
   }
 
   .sidebar {
-    max-width: 100%;
     width: 100%;
+    max-width: 100%;
+
     height: auto;
+
     position: relative;
-    border-right: none;
-    border-bottom: 1px solid var(--border-color);
   }
 
   .main-content,
@@ -870,9 +1696,10 @@
   .add-form,
   .lead-details,
   .agent-details,
-  .lead-status,
   .visualization,
-  .settings {
+  .lead-details-page,
+  .settings,
+  .lead-status {
     padding: 1.5rem;
   }
 
@@ -882,93 +1709,1232 @@
   }
 
   .list-item {
-    width: auto;
     flex: 1 1 calc(50% - 0.5rem);
   }
 
-  .filter-section,
-  .sort-section,
-  .quick-filters {
+  .lead-meta-grid {
     grid-template-columns: 1fr;
+  }
+
+  .form-content {
+    padding: 1.5rem;
+  }
+
+  .filter-section {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-filters,
+  .sort-section {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .form-input,
-  .form-btn,
-  .delete-btn,
+  .add-btn,
   .save-btn,
+  .edit-btn,
   .cancel-btn,
-  .add-btn {
+  .delete-btn,
+  .form-btn {
     width: 100%;
-    text-align: center;
-    justify-content: center;
   }
 }
 
-.crm-description {
-  color: #666;
-  font-size: 0.95rem;
-  margin-top: -10px; /* Optional: tightens the gap between heading and text */
-  margin-bottom: 10px;
+/* ======================================================
+   HERO CARD
+====================================================== */
+
+.lead-hero-card {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 28px;
+
+  padding: 1.75rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin-bottom: 1.75rem;
+
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
 }
-/* Refine the agent card content inside the link */
-.agent-list-item {
+
+.lead-hero-left {
+  display: flex;
+  align-items: center;
+
+  gap: 1.25rem;
+}
+
+/* ======================================================
+   AVATAR
+====================================================== */
+
+.lead-avatar {
+  width: 74px;
+  height: 74px;
+
+  border-radius: 24px;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.7rem;
+  font-weight: 800;
+
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.18);
+
+  flex-shrink: 0;
+}
+
+/* ======================================================
+   HERO CONTENT
+====================================================== */
+
+.lead-hero-content h1 {
+  margin: 0;
+
+  font-size: 1.8rem;
+  font-weight: 800;
+
+  color: var(--text-main);
+
+  line-height: 1.2;
+}
+
+.lead-hero-meta {
+  margin-top: 0.9rem;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+}
+
+/* ======================================================
+   GRID
+====================================================== */
+
+.modern-grid {
+  gap: 1.25rem;
+}
+
+/* ======================================================
+   DETAIL CARDS
+====================================================== */
+
+.lead-card {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 22px;
+
+  padding: 1.35rem;
+
+  transition: all 0.25s ease;
+
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+}
+
+.lead-card:hover {
+  transform: translateY(-3px);
+
+  border-color: #cbd5e1;
+
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.07);
+}
+
+.lead-card label {
+  display: block;
+
+  margin-bottom: 0.7rem;
+
+  font-size: 0.74rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  color: #94a3b8;
+}
+
+.lead-card p {
+  margin: 0;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  color: var(--text-main);
+
+  line-height: 1.5;
+}
+
+/* ======================================================
+   CLOSING HIGHLIGHT
+====================================================== */
+
+.closing-highlight {
+  color: #111827;
+
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+}
+
+/* ======================================================
+   TAGS
+====================================================== */
+
+.tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 0.65rem;
+}
+
+.tag-pill {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem 0.85rem;
+
+  border-radius: 999px;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  border: 1px solid #dbeafe;
+}
+
+.empty-tags {
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+}
+
+/* ======================================================
+   SECTION WRAPPER
+====================================================== */
+
+.details-section {
+  margin-top: 2rem;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .lead-hero-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lead-hero-left {
+    width: 100%;
+  }
+
+  .lead-hero-content h1 {
+    font-size: 1.4rem;
+  }
+
+  .lead-avatar {
+    width: 62px;
+    height: 62px;
+
+    font-size: 1.4rem;
+
+    border-radius: 18px;
+  }
+}
+
+/* ======================================================
+   COMMENTS WRAPPER
+====================================================== */
+
+.comments-wrapper {
   display: flex;
   flex-direction: column;
+
+  gap: 1.5rem;
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.comments-header {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+
   gap: 1rem;
 }
 
-.agent-card-content {
+.comments-count {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.55rem;
+
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  padding: 0.7rem 1rem;
+
+  border-radius: 14px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  color: var(--text-main);
+
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.comments-count svg {
+  color: var(--primary);
+}
+
+/* ======================================================
+   FEED
+====================================================== */
+
+.comments-feed {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+
+  gap: 1rem;
 }
 
-.agent-email-text {
+/* ======================================================
+   COMMENT CARD
+====================================================== */
+
+.comment-card {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 22px;
+
+  padding: 1.35rem;
+
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+
+  transition: all 0.25s ease;
+}
+
+.comment-card:hover {
+  transform: translateY(-2px);
+
+  border-color: #cbd5e1;
+
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* ======================================================
+   TOP
+====================================================== */
+
+.comment-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 1rem;
+}
+
+/* ======================================================
+   AUTHOR
+====================================================== */
+
+.comment-author {
+  display: flex;
+  align-items: center;
+
+  gap: 0.85rem;
+}
+
+.comment-avatar {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1rem;
+  font-weight: 800;
+
+  flex-shrink: 0;
+}
+
+.comment-author h4 {
+  margin: 0;
+
+  font-size: 0.95rem;
+  font-weight: 750;
+
+  color: var(--text-main);
+}
+
+.comment-author span {
+  font-size: 0.78rem;
+
   color: var(--text-muted);
-  font-size: 0.85rem;
 }
 
-.agent-card-footer {
+/* ======================================================
+   DATE
+====================================================== */
+
+.comment-date {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.45rem;
+
   font-size: 0.8rem;
-  font-weight: 600;
+
+  color: var(--text-muted);
+}
+
+.comment-date svg {
   color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  margin-top: auto;
 }
 
-/* Enhancing the hover effect to feel more interactive */
-.agent-list-item:hover .agent-card-footer {
-  text-decoration: underline;
+/* ======================================================
+   BODY
+====================================================== */
+
+.comment-body p {
+  margin: 0;
+
+  line-height: 1.7;
+
+  color: #334155;
+
+  font-size: 0.95rem;
 }
 
-/* Ensure the grid doesn't break on smaller screens */
-.agents .lead-list {
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
-}
+/* ======================================================
+   EMPTY STATE
+====================================================== */
 
-.empty-state {
-  grid-column: 1 / -1;
+.empty-comments {
+  background: white;
+
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 22px;
 
   padding: 3rem 2rem;
+
   text-align: center;
-
-  background: var(--bg-card);
-  border: 1px dashed var(--border-color);
-  border-radius: var(--radius-lg);
 }
 
-.empty-state h3 {
+.empty-comments svg {
+  font-size: 2rem;
+
+  color: var(--primary);
+
+  margin-bottom: 1rem;
+}
+
+.empty-comments h3 {
   margin-bottom: 0.5rem;
+
   color: var(--text-main);
-  font-size: 1.1rem;
-  font-weight: 600;
 }
 
-.empty-state p {
+.empty-comments p {
   color: var(--text-muted);
+}
+
+/* ======================================================
+   FORM CARD
+====================================================== */
+
+.comment-form-card {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 24px;
+
+  padding: 1.6rem;
+
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+/* ======================================================
+   FORM HEADER
+====================================================== */
+
+.comment-form-header {
+  display: flex;
+  align-items: center;
+
+  gap: 0.7rem;
+
+  margin-bottom: 1.4rem;
+}
+
+.comment-form-header svg {
+  color: var(--primary);
+
+  font-size: 1.1rem;
+}
+
+.comment-form-header h3 {
+  margin: 0;
+
+  font-size: 1.1rem;
+  font-weight: 750;
+
+  color: var(--text-main);
+}
+
+/* ======================================================
+   FORM GRID
+====================================================== */
+
+.comment-form-grid {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.25rem;
+}
+
+/* ======================================================
+   TEXTAREA
+====================================================== */
+
+.form-textarea {
+  width: 100%;
+
+  min-height: 130px;
+
+  resize: vertical;
+
+  padding: 1rem;
+
+  border-radius: 16px;
+
+  border: 1px solid var(--border-color);
+
+  background: #f8fafc;
+
   font-size: 0.95rem;
+
+  color: var(--text-main);
+
+  transition: all 0.25s ease;
+}
+
+.form-textarea:focus {
+  outline: none;
+
+  border-color: var(--primary);
+
+  background: white;
+
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* ======================================================
+   SUBMIT
+====================================================== */
+
+.comment-submit-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ======================================================
+   LOADING
+====================================================== */
+
+.loading-card {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .comments-header,
+  .comment-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comment-submit-row {
+    justify-content: stretch;
+  }
+
+  .comment-submit-row .btn {
+    width: 100%;
+  }
+}
+.loading {
+  padding: 3rem;
+}
+
+/* ======================================================
+   AGENT HERO
+====================================================== */
+
+.agent-hero-card {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 28px;
+
+  padding: 1.75rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin-bottom: 1.75rem;
+
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+/* ======================================================
+   LEFT SECTION
+====================================================== */
+
+.agent-hero-left {
+  display: flex;
+  align-items: center;
+
+  gap: 1.25rem;
+}
+
+/* ======================================================
+   AVATAR
+====================================================== */
+
+.agent-hero-avatar {
+  width: 78px;
+  height: 78px;
+
+  border-radius: 24px;
+
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.8rem;
+  font-weight: 800;
+
+  flex-shrink: 0;
+
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.18);
+}
+
+/* ======================================================
+   CONTENT
+====================================================== */
+
+.agent-hero-content h1 {
+  margin: 0;
+
+  font-size: 1.8rem;
+  font-weight: 800;
+
+  color: var(--text-main);
+}
+
+.agent-hero-content p {
+  margin: 0.45rem 0 0.85rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.95rem;
+}
+
+/* ======================================================
+   PERFORMANCE CARD
+====================================================== */
+
+.agent-performance-card {
+  min-width: 220px;
+
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+
+  border: 1px solid #bfdbfe;
+
+  border-radius: 22px;
+
+  padding: 1.4rem;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.agent-performance-card span {
+  color: #2563eb;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+.agent-performance-card h2 {
+  margin: 0.6rem 0 0;
+
+  font-size: 2rem;
+  font-weight: 800;
+
+  color: #1e3a8a;
+}
+
+/* ======================================================
+   FILTER WRAPPER
+====================================================== */
+
+.agent-filters-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+/* ======================================================
+   LEADS SECTION
+====================================================== */
+
+.agent-leads-section {
+  margin-top: 1rem;
+}
+
+/* ======================================================
+   SECTION HEADER
+====================================================== */
+
+.section-heading-row {
+  margin-bottom: 1.2rem;
+}
+
+.section-heading-row h2 {
+  margin: 0;
+
+  font-size: 1.3rem;
+  font-weight: 750;
+
+  color: var(--text-main);
+}
+
+.section-heading-row p {
+  margin-top: 0.4rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.92rem;
+}
+
+/* ======================================================
+   EMPTY STATE
+====================================================== */
+
+.modern-empty {
+  background: white;
+
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 24px;
+
+  padding: 3rem 2rem;
+
+  text-align: center;
+}
+
+.modern-empty h3 {
+  margin-bottom: 0.5rem;
+
+  color: var(--text-main);
+}
+
+.modern-empty p {
+  color: var(--text-muted);
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .agent-hero-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .agent-performance-card {
+    width: 100%;
+  }
+
+  .agent-hero-avatar {
+    width: 64px;
+    height: 64px;
+
+    border-radius: 18px;
+
+    font-size: 1.4rem;
+  }
+
+  .agent-hero-content h1 {
+    font-size: 1.4rem;
+  }
+}
+
+/* ======================================================
+   SETTINGS HEADER
+====================================================== */
+
+.settings-header {
+  margin-bottom: 2rem;
+}
+
+.settings-description {
+  margin-top: 0.6rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.95rem;
+
+  max-width: 720px;
+
+  line-height: 1.7;
+}
+
+/* ======================================================
+   GRID
+====================================================== */
+
+.management-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+
+  gap: 2rem;
+}
+
+/* ======================================================
+   PANEL
+====================================================== */
+
+.management-panel {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 28px;
+
+  padding: 1.5rem;
+
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.4rem;
+}
+
+/* ======================================================
+   PANEL HEADER
+====================================================== */
+
+.management-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding-bottom: 1rem;
+
+  border-bottom: 1px solid #eef2f7;
+}
+
+.management-panel-header h3 {
+  margin: 0;
+
+  font-size: 1.15rem;
+  font-weight: 750;
+
+  color: var(--text-main);
+}
+
+.management-panel-header p {
+  margin-top: 0.45rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.9rem;
+
+  line-height: 1.6;
+}
+
+/* ======================================================
+   COUNT BADGE
+====================================================== */
+
+.management-count {
+  min-width: 54px;
+  height: 54px;
+
+  border-radius: 18px;
+
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+
+  color: #2563eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.15rem;
+  font-weight: 800;
+
+  border: 1px solid #bfdbfe;
+
+  flex-shrink: 0;
+}
+
+/* ======================================================
+   LIST
+====================================================== */
+
+.management-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+/* ======================================================
+   CARD
+====================================================== */
+
+.management-card {
+  background: #fff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 22px;
+
+  padding: 1.1rem;
+
+  transition: all 0.25s ease;
+}
+
+.management-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+
+  border-color: #cbd5e1;
+}
+
+/* ======================================================
+   LINK
+====================================================== */
+
+.management-card-link {
+  text-decoration: none;
+}
+
+/* ======================================================
+   CARD TOP
+====================================================== */
+
+.management-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.management-card-top h4,
+.management-agent-layout h4 {
+  margin: 0;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  color: var(--text-main);
+}
+
+.management-card-top p,
+.management-agent-layout p {
+  margin-top: 0.35rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.88rem;
+}
+
+/* ======================================================
+   AGENT LAYOUT
+====================================================== */
+
+.management-agent-layout {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+}
+
+/* ======================================================
+   ACTIONS
+====================================================== */
+
+.management-card-actions {
+  margin-top: 1rem;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ======================================================
+   DELETE BUTTON IMPROVEMENT
+====================================================== */
+
+.delete-btn {
+  min-height: 40px;
+
+  padding-inline: 1rem;
+
+  border-radius: 12px;
+
+  font-weight: 650;
+
+  transition: all 0.22s ease;
+}
+
+.delete-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .management-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .management-panel {
+    border-radius: 22px;
+  }
+
+  .management-card-top {
+    flex-direction: column;
+  }
+}
+
+/* ======================================================
+   ANALYTICS HEADER
+====================================================== */
+
+.analytics-header {
+  margin-bottom: 2rem;
+}
+
+.analytics-description {
+  margin-top: 0.65rem;
+
+  color: var(--text-muted);
+
+  max-width: 760px;
+
+  line-height: 1.7;
+
+  font-size: 0.96rem;
+}
+
+/* ======================================================
+   KPI GRID
+====================================================== */
+
+.analytics-kpis {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+/* ======================================================
+   KPI CARD
+====================================================== */
+
+.analytics-kpi-card {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 24px;
+
+  padding: 1.5rem;
+
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+
+  transition: all 0.25s ease;
+}
+
+.analytics-kpi-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+}
+
+.analytics-kpi-card span {
+  color: var(--text-muted);
+
+  font-size: 0.82rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+
+  font-weight: 700;
+}
+
+.analytics-kpi-card h2 {
+  margin: 0.85rem 0 0;
+
+  font-size: 2rem;
+
+  font-weight: 800;
+
+  color: var(--text-main);
+}
+
+/* ======================================================
+   CHART CARD
+====================================================== */
+
+.analytics-card {
+  background: white;
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 28px;
+
+  padding: 1.5rem;
+
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+
+  transition: all 0.25s ease;
+}
+
+.analytics-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.07);
+}
+
+/* ======================================================
+   CARD HEADER
+====================================================== */
+
+.analytics-card-header {
+  margin-bottom: 1.25rem;
+}
+
+.analytics-card-header h3 {
+  margin: 0;
+
+  font-size: 1.15rem;
+
+  font-weight: 750;
+
+  color: var(--text-main);
+}
+
+.analytics-card-header p {
+  margin-top: 0.45rem;
+
+  color: var(--text-muted);
+
+  font-size: 0.92rem;
+
+  line-height: 1.6;
+}
+
+/* ======================================================
+   CHART CONTAINER
+====================================================== */
+
+.chart-wrapper {
+  height: 360px;
+
+  width: 100%;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+  .analytics-card {
+    border-radius: 22px;
+  }
+
+  .analytics-kpi-card {
+    border-radius: 20px;
+  }
+
+  .chart-wrapper {
+    height: 300px;
+  }
 }

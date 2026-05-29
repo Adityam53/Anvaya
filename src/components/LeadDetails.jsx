@@ -65,63 +65,113 @@ const LeadDetails = () => {
   return (
     <div className="lead-details-page">
       <Heading tag="h2" name="Prospect Profile" />
-
       {/* ================= VIEW MODE ================= */}
-
+      {/* ================= VIEW MODE ================= */}
       {!isEditing && (
         <>
-          <div className="lead-grid">
-            <div className="lead-card">
-              <label>Name</label>
-              <p>{leadData.name}</p>
+          {/* =========================================
+        HERO SECTION
+    ========================================= */}
+
+          <div className="lead-hero-card">
+            <div className="lead-hero-left">
+              <div className="lead-avatar">
+                {leadData.name?.charAt(0).toUpperCase()}
+              </div>
+
+              <div className="lead-hero-content">
+                <h1>{leadData.name}</h1>
+
+                <div className="lead-hero-meta">
+                  <span
+                    className={`status-badge status-${leadData.status
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                  >
+                    {leadData.status}
+                  </span>
+
+                  <span
+                    className={`priority-badge priority-${leadData.priority.toLowerCase()}`}
+                  >
+                    {leadData.priority} Priority
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div className="lead-card">
-              <label>Source</label>
-              <p>{leadData.source}</p>
-            </div>
-
-            <div className="lead-card">
-              <label>Status</label>
-              <p>{leadData.status}</p>
-            </div>
-
-            <div className="lead-card">
-              <label>Priority</label>
-              <p>{leadData.priority}</p>
-            </div>
-
-            <div className="lead-card">
-              <label>Sales Agent</label>
-              <p>{leadData.salesAgent?.name || "Unassigned"}</p>
-            </div>
-
-            <div className="lead-card">
-              <label>Time to Close</label>
-              <p>{leadData.timeToClose} days</p>
-            </div>
-
-            <div className="lead-card full">
-              <label>Tags</label>
-              <p>{leadData.tags?.join(", ") || "None"}</p>
-            </div>
-          </div>
-
-          <div className="lead-actions">
             <button
-              className="edit-btn"
+              className="btn btn-primary"
               onClick={() => loadLeadForEdit(leadData)}
             >
               Edit Details
             </button>
           </div>
 
-          <Comments />
+          {/* =========================================
+        DETAILS GRID
+    ========================================= */}
+
+          <div className="lead-grid modern-grid">
+            <div className="lead-card">
+              <label>Lead Source</label>
+
+              <p>{leadData.source}</p>
+            </div>
+
+            <div className="lead-card">
+              <label>Assigned Agent</label>
+
+              <p>{leadData.salesAgent?.name || "Unassigned"}</p>
+            </div>
+
+            <div className="lead-card">
+              <label>Time to Close</label>
+
+              <p className="closing-highlight">{leadData.timeToClose} days</p>
+            </div>
+
+            <div className="lead-card">
+              <label>Current Status</label>
+
+              <div>
+                <span
+                  className={`status-badge status-${leadData.status
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                >
+                  {leadData.status}
+                </span>
+              </div>
+            </div>
+
+            <div className="lead-card full">
+              <label>Tags</label>
+
+              <div className="tags-wrapper">
+                {leadData.tags?.length > 0 ? (
+                  leadData.tags.map((tag) => (
+                    <span key={tag} className="tag-pill">
+                      {tag}
+                    </span>
+                  ))
+                ) : (
+                  <span className="empty-tags">No tags assigned</span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* =========================================
+        COMMENTS
+    ========================================= */}
+
+          <div className="details-section">
+            <Comments />
+          </div>
         </>
       )}
-
       {/* ================= EDIT MODE ================= */}
-
       {isEditing && (
         <div className="lead-edit-form">
           <div className="form-group">

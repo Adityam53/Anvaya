@@ -23,55 +23,130 @@ const ManageAgentsAndLeads = () => {
   return (
     <>
       <div className="settings">
-        <Heading tag={"h2"} name={"Administration"} />
+        {/* =====================================
+          PAGE HEADER
+      ===================================== */}
 
-        <div className="leads-agents">
-          <div className="manage-lead">
-            <Heading tag={"h3"} name={"Lead Operations"} />
+        <div className="settings-header">
+          <Heading tag={"h2"} name={"Administration"} />
+
+          <p className="settings-description">
+            Manage sales representatives and customer leads from a centralized
+            administrative workspace.
+          </p>
+        </div>
+
+        {/* =====================================
+          MANAGEMENT GRID
+      ===================================== */}
+
+        <div className="management-grid">
+          {/* =====================================
+            LEAD MANAGEMENT
+        ===================================== */}
+
+          <div className="management-panel">
+            <div className="management-panel-header">
+              <div>
+                <h3>Lead Operations</h3>
+
+                <p>View, monitor, and remove customer leads.</p>
+              </div>
+
+              <div className="management-count">{leadData?.length || 0}</div>
+            </div>
+
             {leadLoading && <p className="loading">Loading leads...</p>}
+
             {leadError && <p className="loading">Error: {leadError}</p>}
 
-            {leadData &&
-              leadData.map((lead) => (
-                <div key={lead._id}>
-                  <Link to={`/leads/${lead._id}`} className="lead-list-item">
-                    <p>
-                      <strong>{lead.name}</strong>
-                    </p>
-                    <p>Source: {lead.source}</p>
-                  </Link>
-                  <button
-                    className="delete-btn"
-                    onClick={() => deleteLead(lead._id, leadUrl, "Lead")}
+            <div className="management-list">
+              {leadData?.map((lead) => (
+                <div key={lead._id} className="management-card">
+                  <Link
+                    to={`/leads/${lead._id}`}
+                    className="management-card-link"
                   >
-                    Delete Lead
-                  </button>
+                    <div className="management-card-top">
+                      <div>
+                        <h4>{lead.name}</h4>
+
+                        <p>{lead.source}</p>
+                      </div>
+
+                      <span
+                        className={`status-badge status-${lead.status
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`}
+                      >
+                        {lead.status}
+                      </span>
+                    </div>
+                  </Link>
+
+                  <div className="management-card-actions">
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteLead(lead._id, leadUrl, "Lead")}
+                    >
+                      Delete Lead
+                    </button>
+                  </div>
                 </div>
               ))}
+            </div>
           </div>
 
-          <div className="manage-agent">
-            <Heading tag={"h3"} name={"Agent Management"} />
+          {/* =====================================
+            AGENT MANAGEMENT
+        ===================================== */}
+
+          <div className="management-panel">
+            <div className="management-panel-header">
+              <div>
+                <h3>Agent Management</h3>
+
+                <p>Manage sales representatives and profiles.</p>
+              </div>
+
+              <div className="management-count">{agentData?.length || 0}</div>
+            </div>
+
             {agentLoading && <p className="loading">Loading agents...</p>}
+
             {agentError && <p className="loading">Error: {agentError}</p>}
 
-            {agentData &&
-              agentData.map((agent) => (
-                <div key={agent._id}>
-                  <Link to={`/agents/${agent._id}`} className="lead-list-item">
-                    <p>
-                      <strong>{agent.name}</strong>
-                    </p>
-                    <p>{agent.email}</p>
-                  </Link>
-                  <button
-                    onClick={() => deleteAgent(agent._id, agentUrl, "Agent")}
-                    className="delete-btn"
+            <div className="management-list">
+              {agentData?.map((agent) => (
+                <div key={agent._id} className="management-card">
+                  <Link
+                    to={`/agents/${agent._id}`}
+                    className="management-card-link"
                   >
-                    Delete Agent
-                  </button>
+                    <div className="management-agent-layout">
+                      <div className="agent-avatar">
+                        {agent.name?.charAt(0).toUpperCase()}
+                      </div>
+
+                      <div>
+                        <h4>{agent.name}</h4>
+
+                        <p>{agent.email}</p>
+                      </div>
+                    </div>
+                  </Link>
+
+                  <div className="management-card-actions">
+                    <button
+                      onClick={() => deleteAgent(agent._id, agentUrl, "Agent")}
+                      className="delete-btn"
+                    >
+                      Delete Agent
+                    </button>
+                  </div>
                 </div>
               ))}
+            </div>
           </div>
         </div>
       </div>
