@@ -150,7 +150,7 @@ const LeadForm = () => {
           </div>
 
           <button
-            className="save-btn"
+            className="btn btn-secondary"
             type="submit"
             style={{ marginTop: "1rem" }}
           >

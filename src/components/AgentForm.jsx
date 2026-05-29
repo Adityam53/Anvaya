@@ -39,7 +39,7 @@ const AgentForm = () => {
             />
           </div>
 
-          <button className="form-btn" type="submit">
+          <button className="btn btn-secondary" type="submit">
             Add Agent
           </button>
         </form>

@@ -900,17 +900,17 @@ body {
 .btn-secondary {
   background: white;
 
-  border-color: var(--border-color);
+  border-color: var(--primary);
 
-  color: var(--text-main);
+  color: var(--primary);
 }
 
 .btn-secondary:hover {
   border-color: var(--primary);
 
-  color: var(--primary);
+  color: white;
 
-  background: #f8fbff;
+  background: var(--primary);
 }
 
 /* DANGER */

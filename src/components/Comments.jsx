@@ -173,7 +173,7 @@ const Comments = () => {
             {/* ACTION */}
 
             <div className="comment-submit-row">
-              <button className="btn btn-primary">
+              <button className="btn btn-secondary">
                 <FiSend />
 
                 <span>Submit Comment</span>
