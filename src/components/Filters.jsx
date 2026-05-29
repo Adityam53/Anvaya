@@ -85,6 +85,8 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
                 : null
             }
             placeholder="Filter by Agent"
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
           />
         )}
 
@@ -100,6 +102,8 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
               : null
           }
           isClearable
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
         />
 
         {showPriorityFilter && (
@@ -115,6 +119,8 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
             }
             isClearable
             placeholder="Filter by Priority"
+            menuPortalTarget={document.body}
+            menuPosition="fixed"
           />
         )}
       </div>

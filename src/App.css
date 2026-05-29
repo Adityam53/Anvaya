@@ -170,7 +170,7 @@ body {
 }
 
 .nav {
-  padding: 1rem;
+  padding: 0 1rem 0 1rem;
 }
 
 .nav-items {
@@ -2937,4 +2937,29 @@ body {
   .chart-wrapper {
     height: 300px;
   }
+}
+
+/* ======================================================
+   REACT SELECT FIX
+====================================================== */
+
+.react-select-container {
+  position: relative;
+  z-index: 50;
+}
+
+.react-select__menu {
+  z-index: 9999 !important;
+
+  border-radius: 16px !important;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border-color);
+
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.react-select__menu-portal {
+  z-index: 9999 !important;
 }
