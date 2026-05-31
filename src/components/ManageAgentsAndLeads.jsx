@@ -68,10 +68,14 @@ const ManageAgentsAndLeads = () => {
                     className="management-card-link"
                   >
                     <div className="management-card-top">
-                      <div>
-                        <h4>{lead.name}</h4>
-
-                        <p>{lead.source}</p>
+                      <div className="management-agent-layout">
+                        <div className="agent-avatar">
+                          {lead.name?.charAt(0).toUpperCase()}
+                        </div>
+                        <div>
+                          <h4>{lead.name}</h4>
+                          <p>{lead.source}</p>
+                        </div>
                       </div>
 
                       <span

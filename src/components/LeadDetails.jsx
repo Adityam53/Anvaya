@@ -64,7 +64,7 @@ const LeadDetails = () => {
 
   return (
     <div className="lead-details-page">
-      <Heading tag="h2" name="Prospect Profile" />
+      {isEditing && <Heading tag="h2" name="Edit Profile" />}
       {/* ================= VIEW MODE ================= */}
       {/* ================= VIEW MODE ================= */}
       {!isEditing && (
@@ -72,6 +72,7 @@ const LeadDetails = () => {
           {/* =========================================
         HERO SECTION
     ========================================= */}
+          <Heading tag="h2" name="Prospect Profile" />
 
           <div className="lead-hero-card">
             <div className="lead-hero-left">
@@ -83,13 +84,13 @@ const LeadDetails = () => {
                 <h1>{leadData.name}</h1>
 
                 <div className="lead-hero-meta">
-                  <span
+                  {/* <span
                     className={`status-badge status-${leadData.status
                       .toLowerCase()
                       .replace(/\s+/g, "-")}`}
                   >
                     {leadData.status}
-                  </span>
+                  </span> */}
 
                   <span
                     className={`priority-badge priority-${leadData.priority.toLowerCase()}`}
@@ -101,7 +102,7 @@ const LeadDetails = () => {
             </div>
 
             <button
-              className="btn btn-secondary"
+              className="btn btn-primary"
               onClick={() => loadLeadForEdit(leadData)}
             >
               Edit Details
@@ -173,7 +174,7 @@ const LeadDetails = () => {
       )}
       {/* ================= EDIT MODE ================= */}
       {isEditing && (
-        <div className="lead-edit-form">
+        <div className="lead-edit-form form-content">
           <div className="form-group">
             <label>Name</label>
             <input
