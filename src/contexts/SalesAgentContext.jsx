@@ -55,7 +55,6 @@ export const SalesAgentProvider = ({ children }) => {
 
       toast.success("Agent added successfully!");
 
-      // ✅ Re-fetch latest data from backend (optional, but safest)
       setUrl(`${baseUrl}?t=${Date.now()}`);
 
       setFormData({ name: "", email: "" }); // Reset form
@@ -68,7 +67,7 @@ export const SalesAgentProvider = ({ children }) => {
   const handleDelete = async (id, url, name) => {
     try {
       const confirmed = window.confirm(
-        `Are you sure you want to delete this ${name} ?`
+        `Are you sure you want to delete this ${name} ?`,
       );
 
       if (!confirmed) return;
