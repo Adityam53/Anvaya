@@ -136,11 +136,15 @@ export const LeadProvider = ({ children }) => {
       !formData.salesAgent ||
       !formData.status ||
       !formData.priority ||
-      !formData.tags ||
-      !formData.tags
+      !formData.tags.length > 0 ||
+      !formData.timeToClose
     ) {
       toast.error("Please fill all the fields");
       return;
+    }
+
+    if (formData.timeToClose <= 0) {
+      toast.error("Time to close cannot be 0 or less.");
     }
     try {
       const response = await fetch(baseUrl, {
