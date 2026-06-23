@@ -108,7 +108,7 @@ Response:
 GET /agents/:id
 
 Response:
-```
+```json
 {
   "_id": "65f456def789",
   "name": "Sarah Johnson",
