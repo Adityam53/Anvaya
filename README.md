@@ -1,4 +1,4 @@
-# Anvaya CRM
+# Ascendra CRM
 
 A full-stack customer relationship management app where you can browse, add, edit and delete leads and sales Agent. Detailes of lead and sales Agent, with management of both.
 Developed using React JS, React Router, Express, Node JS and MongoDb database.
@@ -128,13 +128,13 @@ Sample Response:<br>
 
 ### **POST /api/Agents**<br>
 
-Create a new Agent (protected)
+Create a new Agent ()
 Sample Response:
 {\_id, name, email, ... }
 
 ### **POST /api/Leads**<br>
 
-Create a new lead (protected)
+Create a new lead ()
 Sample Response:
 {\_id, name, source, ... }
 
