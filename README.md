@@ -121,7 +121,8 @@ POST /agents
 ## Create a new agent.
 
 Request:
-```
+```json
+
 {
   "name": "Sarah Johnson",
   "email": "sarah@email.com",
@@ -129,7 +130,7 @@ Request:
 }
 ```
 Response:
-```
+```json
 {
   "message": "New Sales agent created successfully!",
   "savedAgent": {
@@ -144,7 +145,7 @@ DELETE /agents/:id
 ## Delete an agent.
 
 Response:
-```
+```json
 {
   "_id": "65f456def789",
   "name": "Sarah Johnson",
@@ -160,7 +161,7 @@ GET /leads
 salesAgent, status, priority, source, tags
 
 Response:
-```
+```json
 [
   {
     "_id": "lead123",
@@ -181,7 +182,7 @@ GET /leads/:id
 ## Fetch lead by ID.
 
 Response:
-```
+```json
 {
   "_id": "lead123",
   "name": "ABC Company",
@@ -203,7 +204,7 @@ GET /leads/agent/:agentId
 status, priority
 
 Response:
-```
+```json
 [
   {
     "_id": "lead123",
@@ -221,7 +222,7 @@ POST /leads
 ## Create a new lead.
 
 Request:
-```
+```json
 {
   "name": "ABC Company",
   "source": "Website",
@@ -232,7 +233,7 @@ Request:
 }
 ```
 Response:
-```
+```json
 {
   "message": "New Lead created successfully!",
   "savedLead": {
@@ -248,14 +249,14 @@ PUT /leads/:id
 ## Update a lead.
 
 Request:
-```
+```json
 {
   "status": "Closed",
   "priority": "Medium"
 }
 ```
 Response:
-```
+```json
 {
   "_id": "lead123",
   "status": "Closed",
@@ -267,7 +268,7 @@ DELETE /leads/:id
 ## Delete a lead.
 
 Response:
-```
+```json
 {
   "message": "Lead deleted successfully",
   "deletedLead": {
@@ -282,7 +283,7 @@ GET /leads/:id/comments
 ## Fetch comments for a lead.
 
 Response:
-```
+```json
 [
   {
     "_id": "c1",
@@ -302,7 +303,7 @@ POST /leads/:id/comments
 ## Add a comment.
 
 Request:
-```
+```json
 {
   "text": "Client is interested",
   "lead": "leadId",
@@ -310,7 +311,7 @@ Request:
 }
 ```
 Response:
-```
+```json
 {
   "message": "Comment added successfully!",
   "savedComment": {
@@ -325,7 +326,7 @@ GET /tags
 ## Fetch all tags.
 
 Response:
-```
+```json
 [
   {
     "_id": "t1",
@@ -336,7 +337,7 @@ Response:
 POST /tags
 
 ## Create a tag.
-```
+```json
 Request:
 
 {
@@ -344,7 +345,7 @@ Request:
 }
 ```
 Response:
-```
+```json
 {
   "message": "Tag created successfully!",
   "tag": {
@@ -359,7 +360,7 @@ GET /report/last-week
 ## Leads closed in last 7 days.
 
 Response:
-```
+```json
 {
   "success": true,
   "totalClosedLeads": 5,
@@ -376,7 +377,7 @@ GET /report/closed-by-agent
 ## Closed leads grouped by agent.
 
 Response:
-```
+```json
 {
   "success": true,
   "totalAgents": 3,
@@ -393,7 +394,7 @@ GET /report/pipeline
 ## Pipeline distribution.
 
 Response:
-```
+```json
 {
   "success": true,
   "totalPipelineLeads": 25,
@@ -409,6 +410,3 @@ Response:
 
 For bugs or feature requests, please reach out to (adityamoorjmalani53@gamil.com)
 
-```
-
-```
