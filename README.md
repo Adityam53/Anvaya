@@ -82,62 +82,329 @@ Watch a walkthrough (3 minutes) of all major features of this app:[Loom Video](h
 
 ## API Reference
 
-### **GET/API/Leads**<br>
+This is a REST API for managing Sales Agents, Leads, Comments, Tags, and Reports.
 
-List All Leads<br>
-Sample Response:<br>
+---
 
-```
+# Agents APIs
 
-[{_id,name,source,tags},...]
+## Get All Agents
+GET /agents
 
-```
-
-### **GET/API/Agents**<br>
-
-List All Agents<br>
-Sample Response:<br>
-
-```
-
-[{_id,name,email},...]
-
-```
-
-### **GET/API/Leads/:id**<br>
-
-Lead By Id<br>
-Sample Response:<br>
+Response:
+```json
+[
+  {
+    "_id": "65f456def789",
+    "name": "Sarah Johnson",
+    "email": "sarah@email.com"
+  }
+]
 
 ```
 
-{\_id,name,source,tags}
+## Get Agent by ID
 
+GET /agents/:id
+
+Response:
+```
+{
+  "_id": "65f456def789",
+  "name": "Sarah Johnson",
+  "email": "sarah@email.com"
+}
 ```
 
-### **GET/API/Agents/:id**<br>
+POST /agents
 
-Agent By Id<br>
-Sample Response:<br>
+## Create a new agent.
 
+Request:
+```
+{
+  "name": "Sarah Johnson",
+  "email": "sarah@email.com",
+  "password": "hashedPassword"
+}
+```
+Response:
+```
+{
+  "message": "New Sales agent created successfully!",
+  "savedAgent": {
+    "_id": "65f456def789",
+    "name": "Sarah Johnson",
+    "email": "sarah@email.com"
+  }
+}
+```
+DELETE /agents/:id
+
+## Delete an agent.
+
+Response:
+```
+{
+  "_id": "65f456def789",
+  "name": "Sarah Johnson",
+  "email": "sarah@email.com"
+}
+```
+## Leads APIs
+GET /leads
+
+###Fetch all leads (supports filters).
+
+## Query params:
+salesAgent, status, priority, source, tags
+
+Response:
+```
+[
+  {
+    "_id": "lead123",
+    "name": "ABC Company",
+    "source": "Website",
+    "salesAgent": {
+      "name": "Sarah Johnson",
+      "email": "sarah@email.com"
+    },
+    "status": "New",
+    "tags": ["Hot"],
+    "priority": "High"
+  }
+]
+```
+GET /leads/:id
+
+## Fetch lead by ID.
+
+Response:
+```
+{
+  "_id": "lead123",
+  "name": "ABC Company",
+  "source": "Website",
+  "salesAgent": {
+    "name": "Sarah Johnson",
+    "email": "sarah@email.com"
+  },
+  "status": "Negotiation",
+  "tags": ["Hot"],
+  "priority": "High"
+}
+```
+GET /leads/agent/:agentId
+
+## Fetch leads for a specific agent.
+
+## Query params:
+status, priority
+
+Response:
+```
+[
+  {
+    "_id": "lead123",
+    "name": "ABC Company",
+    "status": "New",
+    "salesAgent": {
+      "name": "Sarah Johnson",
+      "email": "sarah@email.com"
+    }
+  }
+]
+```
+POST /leads
+
+## Create a new lead.
+
+Request:
+```
+{
+  "name": "ABC Company",
+  "source": "Website",
+  "salesAgent": "agentId",
+  "status": "New",
+  "priority": "High",
+  "tags": ["Hot"]
+}
+```
+Response:
+```
+{
+  "message": "New Lead created successfully!",
+  "savedLead": {
+    "_id": "lead123",
+    "name": "ABC Company",
+    "status": "New",
+    "closedAt": null
+  }
+}
+```
+PUT /leads/:id
+
+## Update a lead.
+
+Request:
+```
+{
+  "status": "Closed",
+  "priority": "Medium"
+}
+```
+Response:
+```
+{
+  "_id": "lead123",
+  "status": "Closed",
+  "closedAt": "2026-06-23T10:00:00.000Z"
+}
+```
+DELETE /leads/:id
+
+## Delete a lead.
+
+Response:
+```
+{
+  "message": "Lead deleted successfully",
+  "deletedLead": {
+    "_id": "lead123",
+    "name": "ABC Company"
+  }
+}
+```
+Comments APIs
+GET /leads/:id/comments
+
+## Fetch comments for a lead.
+
+Response:
+```
+[
+  {
+    "_id": "c1",
+    "text": "Followed up with client",
+    "lead": {
+      "name": "ABC Company"
+    },
+    "author": {
+      "name": "Sarah Johnson",
+      "email": "sarah@email.com"
+    }
+  }
+]
+```
+POST /leads/:id/comments
+
+## Add a comment.
+
+Request:
+```
+{
+  "text": "Client is interested",
+  "lead": "leadId",
+  "author": "agentId"
+}
+```
+Response:
+```
+{
+  "message": "Comment added successfully!",
+  "savedComment": {
+    "_id": "c1",
+    "text": "Client is interested"
+  }
+}
+```
+## Tags APIs
+GET /tags
+
+## Fetch all tags.
+
+Response:
+```
+[
+  {
+    "_id": "t1",
+    "name": "Hot"
+  }
+]
+```
+POST /tags
+
+## Create a tag.
+```
+Request:
+
+{
+  "name": "Hot"
+}
+```
+Response:
+```
+{
+  "message": "Tag created successfully!",
+  "tag": {
+    "_id": "t1",
+    "name": "Hot"
+  }
+}
+```
+## Reports APIs
+GET /report/last-week
+
+## Leads closed in last 7 days.
+
+Response:
+```
+{
+  "success": true,
+  "totalClosedLeads": 5,
+  "data": [
+    {
+      "date": "2026-06-22",
+      "closedCount": 2
+    }
+  ]
+}
+```
+GET /report/closed-by-agent
+
+## Closed leads grouped by agent.
+
+Response:
+```
+{
+  "success": true,
+  "totalAgents": 3,
+  "data": [
+    {
+      "salesAgentName": "Sarah Johnson",
+      "closedLeadsCount": 10
+    }
+  ]
+}
 ```
 
-{\_id,name,email}
+GET /report/pipeline
+## Pipeline distribution.
 
+Response:
 ```
-
-### **POST /api/Agents**<br>
-
-Create a new Agent ()
-Sample Response:
-{\_id, name, email, ... }
-
-### **POST /api/Leads**<br>
-
-Create a new lead ()
-Sample Response:
-{\_id, name, source, ... }
-
+{
+  "success": true,
+  "totalPipelineLeads": 25,
+  "data": [
+    {
+      "status": "New",
+      "totalLeads": 10
+    }
+  ]
+}
+```
 ## Contact
 
 For bugs or feature requests, please reach out to (adityamoorjmalani53@gamil.com)
