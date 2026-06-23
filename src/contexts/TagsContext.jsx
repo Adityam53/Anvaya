@@ -7,7 +7,7 @@ export const useTagsContext = () => useContext(TagsContext);
 
 export const TagsContextProvider = ({ children }) => {
   const { data, error, loading } = useFetch(
-    "https://anvaya-backend-teal.vercel.app/tags"
+    "https://anvaya-backend-teal.vercel.app/tags",
   );
 
   const [tags, setTags] = useState([]);

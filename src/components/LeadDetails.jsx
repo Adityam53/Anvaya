@@ -65,8 +65,6 @@ const LeadDetails = () => {
   return (
     <div className="lead-details-page">
       {isEditing && <Heading tag="h2" name="Edit Profile" />}
-      {/* ================= VIEW MODE ================= */}
-      {/* ================= VIEW MODE ================= */}
       {!isEditing && (
         <>
           {/* =========================================

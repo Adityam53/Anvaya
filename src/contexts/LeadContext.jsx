@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const LeadContext = createContext();
 export const useLeadContext = () => useContext(LeadContext);
@@ -15,6 +16,7 @@ export const LeadProvider = ({ children }) => {
   const triggerRefresh = () => setRefreshKey((prev) => prev + 1);
 
   const [url, setUrl] = useState(baseUrl);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const fullUrl = url.includes("?")
     ? `${url}&refresh=${refreshKey}`
@@ -25,13 +27,14 @@ export const LeadProvider = ({ children }) => {
   const [leads, setLeads] = useState([]);
 
   const [filters, setFilters] = useState({
-    salesAgent: "",
-    status: "",
-    priority: "",
-    sortBy: "",
-    sortOrder: "asc",
+    salesAgent: searchParams.get("salesAgent") || "",
+    status: searchParams.get("status") || "",
+    priority: searchParams.get("priority") || "",
+    source: searchParams.get("source") || "",
+    tags: searchParams.get("tags") || "",
+    sortBy: searchParams.get("sortBy") || "",
+    sortOrder: searchParams.get("sortOrder") || "asc",
   });
-
   const [formData, setFormData] = useState({
     name: "",
     source: "",
@@ -266,6 +269,8 @@ export const LeadProvider = ({ children }) => {
       salesAgent: "",
       status: "",
       priority: "",
+      source: "",
+      tags: "",
       sortBy: "",
       sortOrder: "asc",
     });
@@ -295,6 +300,9 @@ export const LeadProvider = ({ children }) => {
       params.push(`priority=${encodeURIComponent(filters.priority)}`);
     if (filters.salesAgent)
       params.push(`salesAgent=${encodeURIComponent(filters.salesAgent)}`);
+    if (filters.source)
+      params.push(`source=${encodeURIComponent(filters.source)}`);
+    if (filters.tags) params.push(`tags=${encodeURIComponent(filters.tags)}`);
 
     const query = params.length ? `?${params.join("&")}` : "";
     return agentId
@@ -303,13 +311,32 @@ export const LeadProvider = ({ children }) => {
   };
 
   const applyFilters = (newFilters) => {
-    setFilters((prev) => ({ ...prev, ...newFilters }));
-  };
+    const updated = {
+      ...filters,
+      ...newFilters,
+    };
 
+    setFilters(updated);
+
+    const params = {};
+
+    Object.entries(updated).forEach(([key, value]) => {
+      if (value) {
+        params[key] = value;
+      }
+    });
+
+    setSearchParams(params);
+  };
   useEffect(() => {
     setUrl(buildUrl());
-  }, [filters.status, filters.priority, filters.salesAgent]);
-
+  }, [
+    filters.status,
+    filters.priority,
+    filters.salesAgent,
+    filters.source,
+    filters.tags,
+  ]);
   console.log(leads);
 
   return (

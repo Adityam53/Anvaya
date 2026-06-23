@@ -4,9 +4,11 @@ import { FiFilter, FiClock, FiFlag } from "react-icons/fi";
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 import { useSalesAgentContext } from "../contexts/SalesAgentContext";
 import { useLeadContext } from "../contexts/LeadContext";
+import { useTagsContext } from "../contexts/TagsContext";
 
 const Filters = ({ showAgentFilter, showPriorityFilter }) => {
   const { agents } = useSalesAgentContext();
+  const { tags } = useTagsContext();
 
   const { applyFilters, filters } = useLeadContext();
 
@@ -17,14 +19,27 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
     "Proposal Sent",
     "Closed",
   ];
-
+  const sourceEnums = [
+    "Website",
+    "Referral",
+    "Cold Call",
+    "Advertisement",
+    "Email",
+    "Other",
+  ];
   const priorityEnums = ["High", "Medium", "Low"];
-
+  const sourceOptions = sourceEnums.map((src) => ({
+    value: src,
+    label: src,
+  }));
   const agentOptions = agents.map((a) => ({
     value: a._id,
     label: a.name,
   }));
-
+  const tagOptions = tags.map((t) => ({
+    value: t.name,
+    label: t.name,
+  }));
   const statusOptions = statusEnums.map((stat) => ({
     value: stat,
     label: stat,
@@ -46,10 +61,22 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
       status: selectedOption ? selectedOption.value : "",
     });
   };
-
+  const handleTagChange = (selectedOptions) => {
+    applyFilters({
+      tags: selectedOptions
+        ? selectedOptions.map((tag) => tag.value).join(",")
+        : "",
+    });
+  };
   const handlePriorityChange = (selectedOption) => {
     applyFilters({
       priority: selectedOption ? selectedOption.value : "",
+    });
+  };
+
+  const handleSourceChange = (selectedOption) => {
+    applyFilters({
+      source: selectedOption ? selectedOption.value : "",
     });
   };
 
@@ -106,23 +133,39 @@ const Filters = ({ showAgentFilter, showPriorityFilter }) => {
           menuPosition="fixed"
         />
 
-        {showPriorityFilter && (
-          <Select
-            className="react-select-container"
-            classNamePrefix="react-select"
-            options={priorityOptions}
-            onChange={handlePriorityChange}
-            value={
-              filters.priority
-                ? priorityOptions.find((opt) => opt.value === filters.priority)
-                : null
-            }
-            isClearable
-            placeholder="Filter by Priority"
-            menuPortalTarget={document.body}
-            menuPosition="fixed"
-          />
-        )}
+        <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
+          options={sourceOptions}
+          placeholder="Filter by Source"
+          isClearable
+          onChange={handleSourceChange}
+          value={
+            filters.source
+              ? sourceOptions.find((opt) => opt.value === filters.source)
+              : null
+          }
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+        />
+
+        <Select
+          className="react-select-container"
+          classNamePrefix="react-select"
+          options={tagOptions}
+          isMulti
+          placeholder="Filter by Tags"
+          onChange={handleTagChange}
+          value={
+            filters.tags
+              ? tagOptions.filter((opt) =>
+                  filters.tags.split(",").includes(opt.value),
+                )
+              : []
+          }
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+        />
       </div>
 
       {/* ======================================================
