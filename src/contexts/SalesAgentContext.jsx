@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const SalesAgentContext = createContext();
 
@@ -10,6 +11,7 @@ export const useSalesAgentContext = () => useContext(SalesAgentContext);
 export const SalesAgentProvider = ({ children }) => {
   const baseUrl = "https://anvaya-backend-teal.vercel.app/agents";
 
+  const navigate = useNavigate();
   const [refreshKey, setRefreshKey] = useState(0);
   const triggerRefresh = () => setRefreshKey((prev) => prev + 1);
 
@@ -33,8 +35,25 @@ export const SalesAgentProvider = ({ children }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email) {
-      toast.error("Please fill in all the fields.");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formData.name.trim()) {
+      toast.error("Agent name is required.");
+      return;
+    }
+
+    if (formData.name.trim().length < 2) {
+      toast.error("Agent name must be at least 2 characters.");
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      toast.error("Email is required.");
+      return;
+    }
+
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email.");
       return;
     }
     try {
@@ -60,7 +79,7 @@ export const SalesAgentProvider = ({ children }) => {
       setFormData({ name: "", email: "" }); // Reset form
     } catch (error) {
       console.error(error);
-      toast.error("❌ Failed to add agent. Try again later.");
+      toast.error("Failed to add agent. Try again later.");
     }
   };
 

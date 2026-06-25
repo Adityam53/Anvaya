@@ -12,10 +12,6 @@ const LeadList = ({ hideHeading = false, hideDelete = false }) => {
 
   return (
     <div className="leads">
-      {/* ======================================================
-          PAGE HEADER
-      ====================================================== */}
-
       {!hideHeading && (
         <div className="page-header">
           <div>
@@ -31,15 +27,7 @@ const LeadList = ({ hideHeading = false, hideDelete = false }) => {
         </div>
       )}
 
-      {/* ======================================================
-          FILTERS
-      ====================================================== */}
-
       <Filters showAgentFilter showPriorityFilter />
-
-      {/* ======================================================
-          LOADING / ERROR
-      ====================================================== */}
 
       {loading && (
         <div className="section">
@@ -53,10 +41,6 @@ const LeadList = ({ hideHeading = false, hideDelete = false }) => {
         </div>
       )}
 
-      {/* ======================================================
-          LEADS GRID
-      ====================================================== */}
-
       {!loading && leads?.length > 0 ? (
         <div className="lead-list">
           {leads.map((lead) => (
@@ -65,8 +49,6 @@ const LeadList = ({ hideHeading = false, hideDelete = false }) => {
               className="lead-list-item"
               to={`/leads/${lead._id}`}
             >
-              {/* ================= HEADER ================= */}
-
               <div className="lead-card-header">
                 <div className="lead-header-content">
                   <h3>{lead.name}</h3>

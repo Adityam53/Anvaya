@@ -6,7 +6,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div>
         <Link to="/" style={{ textDecoration: "none" }}>
-          <Heading tag="h2" name="Anvaya" />
+          <Heading tag="h2" name="Ascendra" />
         </Link>
         <Navigation />
       </div>

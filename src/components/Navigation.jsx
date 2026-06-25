@@ -24,7 +24,7 @@ const Navigation = () => {
   return (
     <nav className="nav" onClick={() => setIsOpen(!isOpen)}>
       <div className="mobile-nav-header">
-        <h2 className="nav-heading">Anvaya</h2>
+        <h2 className="nav-heading">Ascendra</h2>
 
         <button
           className="mobile-nav-toggle"

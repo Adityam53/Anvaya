@@ -3,6 +3,7 @@ import useFetch from "../hooks/useFetch";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LeadContext = createContext();
 export const useLeadContext = () => useContext(LeadContext);
@@ -11,6 +12,7 @@ export const LeadProvider = ({ children }) => {
   const baseUrl = "https://anvaya-backend-teal.vercel.app/leads";
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [refreshKey, setRefreshKey] = useState(0);
   const triggerRefresh = () => setRefreshKey((prev) => prev + 1);
@@ -104,8 +106,71 @@ export const LeadProvider = ({ children }) => {
       [field]: selectedOption ? selectedOption.value : "",
     }));
   };
+  const validateLead = (lead) => {
+    const statusEnums = [
+      "New",
+      "Contacted",
+      "Qualified",
+      "Proposal Sent",
+      "Closed",
+    ];
 
+    const priorityEnums = ["High", "Medium", "Low"];
+
+    const sourceEnums = [
+      "Website",
+      "Referral",
+      "Cold Call",
+      "Advertisement",
+      "Email",
+      "Other",
+    ];
+
+    if (!lead.name?.trim()) {
+      toast.error("Lead name is required.");
+      return false;
+    }
+
+    if (lead.name.trim().length < 2) {
+      toast.error("Lead name must be at least 2 characters.");
+      return false;
+    }
+
+    if (!sourceEnums.includes(lead.source)) {
+      toast.error("Please select a valid source.");
+      return false;
+    }
+
+    if (!lead.salesAgent) {
+      toast.error("Please select a sales agent.");
+      return false;
+    }
+
+    if (!statusEnums.includes(lead.status)) {
+      toast.error("Please select a valid status.");
+      return false;
+    }
+
+    if (!priorityEnums.includes(lead.priority)) {
+      toast.error("Please select a valid priority.");
+      return false;
+    }
+
+    if (!lead.timeToClose || Number(lead.timeToClose) < 1) {
+      toast.error("Time to close must be greater than 0.");
+      return false;
+    }
+
+    if (!lead.tags?.length) {
+      toast.error("Please select at least one tag.");
+      return false;
+    }
+
+    return true;
+  };
   const handleEditSubmit = async (leadId) => {
+    if (!validateLead(editFormData)) return;
+
     try {
       const res = await fetch(`${baseUrl}/${leadId}`, {
         method: "PUT",
@@ -133,22 +198,8 @@ export const LeadProvider = ({ children }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.source ||
-      !formData.salesAgent ||
-      !formData.status ||
-      !formData.priority ||
-      !formData.tags.length > 0 ||
-      !formData.timeToClose
-    ) {
-      toast.error("Please fill all the fields");
-      return;
-    }
+    if (!validateLead(formData)) return;
 
-    if (formData.timeToClose <= 0) {
-      toast.error("Time to close cannot be 0 or less.");
-    }
     try {
       const response = await fetch(baseUrl, {
         method: "POST",
@@ -165,7 +216,7 @@ export const LeadProvider = ({ children }) => {
       const newLead = await response.json();
       setLeads((prev) => [...prev, newLead]);
       toast.success("Lead created successfully!");
-
+      navigate("/leads");
       setUrl(`${baseUrl}?t=${Date.now()}`);
       triggerRefresh();
 
